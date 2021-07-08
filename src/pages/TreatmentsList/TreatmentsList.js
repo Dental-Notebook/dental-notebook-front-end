@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import EditTreatment from "../../components/EditTreatment/EditTreatment";
 
 const TreatmentsList = () => {
   const [treatments, setTreatments] = useState([]);
@@ -8,11 +9,7 @@ const TreatmentsList = () => {
     name: "",
     price: "",
   });
-  const [isEditModeActive, setIsEditModeActive] = useState(false);
-  const [editTreatment, setEditedTreatment] = useState({
-    name: treatments.name,
-    price: treatments.price,
-  });
+
   const fetchTreatments = () => {
     axios
       .get("/treatments")
@@ -22,7 +19,9 @@ const TreatmentsList = () => {
   useEffect(() => {
     fetchTreatments();
   }, []);
-
+  {
+    /* ==============DELETE TREATMENT=============== */
+  }
   const handleDelete = (treatmentId) => {
     axios
       .delete(`/treatments/${treatmentId}`)
@@ -36,18 +35,9 @@ const TreatmentsList = () => {
       .catch((error) => alert(error));
   };
 
-  const handleEdit = () => {
-    setIsEditModeActive(true);
-  };
-
-  // const handleSubmitEditTreatment = (event, treatmentId) => {
-  //   event.preventDefault();
-  //   axios
-  //     .put(`/treatments/${treatmentId}`, editTreatment)
-  //     .then((response) => setTreatments(response.data))
-  //     .catch((error) => console.log(error));
-  // };
-
+  {
+    /* ==============ADD TREATMENT=============== */
+  }
   const handleAddNewTreatment = (event) => {
     const { name, value } = event.target;
     setNewTreatment({ ...newTreatment, [name]: value });
@@ -67,16 +57,22 @@ const TreatmentsList = () => {
   return (
     <div>
       <h1>Price List</h1>
+      {/* ==============MAP TREATMENTS=============== */}
       {treatments.map((treatment) => {
         return (
           <div key={treatment.id}>
             <p>{treatment.name}</p>
             <p>{treatment.price}$</p>
-            <button onClick={handleEdit}>Edit</button>
+            <EditTreatment
+              {...treatment}
+              setTreatments={setTreatments}
+              treatments={treatments}
+            />
             <button onClick={() => handleDelete(treatment.id)}>Delete</button>
           </div>
         );
       })}
+      {/* ==============ADD NEW TREATMENT=============== */}
       {isAddNewTreatmentShown ? (
         <div>
           <form onSubmit={handleSubmitNewTreatment}>
@@ -105,6 +101,7 @@ const TreatmentsList = () => {
           Add new treatment
         </button>
       )}
+      {/* ==============ADD NEW TREATMENT END=============== */}
     </div>
   );
 };
