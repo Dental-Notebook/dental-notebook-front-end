@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";
 import AddNewPatient from "./pages/AddNewPatient/AddNewPatient";
 import Patients from "./pages/Patients/Patients";
