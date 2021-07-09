@@ -6,12 +6,15 @@ import Patients from "./pages/Patients/Patients";
 import Appointments from "./pages/Appointments/Appointments";
 import Earnings from "./pages/Earnings/Earnings";
 import TreatmentsList from "./pages/TreatmentsList/TreatmentsList";
+import AppointmentsProvider from "./contexts/AppointmentsContext";
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Homepage} />
+        <AppointmentsProvider>
+          <Route exact path="/" component={Homepage} />
+        </AppointmentsProvider>
         <Route path="/add-new-patient" component={AddNewPatient} />
         <Route path="/patients" component={Patients} />
         <Route path="/appointments" component={Appointments} />

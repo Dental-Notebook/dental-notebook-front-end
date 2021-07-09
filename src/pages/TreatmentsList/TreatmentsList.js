@@ -51,7 +51,7 @@ const TreatmentsList = () => {
         setTreatments([...treatments, response.data]);
         setIsAddNewTreatmentShown(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error));
   };
 
   return (
