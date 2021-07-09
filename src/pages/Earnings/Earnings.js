@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import moment from "moment";
 
 const Earnings = () => {
   const [totalEarnings, setTotalEarnings] = useState(0);
@@ -54,15 +55,41 @@ const Earnings = () => {
       <p>{lastMonthEarnings}</p>
       <h1>Earnings By Date</h1>
       <div>
-        {earningsByDate.map(function (earn, index) {
-          return (
-            <div>
-              <p>{earn.name}</p>
-              <p>{earn.appointment_date}</p>
-              <p>{earn.treatments_earnings}</p>
-            </div>
-          );
-        })}
+        {earningsByDate.length >= 1 &&
+          earningsByDate.map(function (earn, index) {
+            if (index === 0) {
+              return (
+                <div>
+                  <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
+                  <p>
+                    {earn.name} {earn.treatments_earnings}
+                  </p>
+                </div>
+              );
+            } else if (
+              moment(earn.appointment_date).format("MMM Do YY") !==
+              moment(earningsByDate[index - 1].appointment_date).format(
+                "MMM Do YY"
+              )
+            ) {
+              return (
+                <div>
+                  <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
+                  <p>
+                    {earn.name} {earn.treatments_earnings}
+                  </p>
+                </div>
+              );
+            } else {
+              return (
+                <div>
+                  <p>
+                    {earn.name} {earn.treatments_earnings}
+                  </p>
+                </div>
+              );
+            }
+          })}
       </div>
     </div>
   );
