@@ -19,9 +19,8 @@ const TreatmentsList = () => {
   useEffect(() => {
     fetchTreatments();
   }, []);
-  {
-    /* ==============DELETE TREATMENT=============== */
-  }
+
+  /* ==============DELETE TREATMENT=============== */
   const handleDelete = (treatmentId) => {
     axios
       .delete(`/treatments/${treatmentId}`)
@@ -35,9 +34,7 @@ const TreatmentsList = () => {
       .catch((error) => alert(error));
   };
 
-  {
-    /* ==============ADD TREATMENT=============== */
-  }
+  /* ==============ADD TREATMENT=============== */
   const handleAddNewTreatment = (event) => {
     const { name, value } = event.target;
     setNewTreatment({ ...newTreatment, [name]: value });
@@ -51,7 +48,7 @@ const TreatmentsList = () => {
         setTreatments([...treatments, response.data]);
         setIsAddNewTreatmentShown(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error));
   };
 
   return (
