@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const EditTreatment = (props) => {
@@ -10,9 +10,7 @@ const EditTreatment = (props) => {
     price: price,
   });
 
-  {
-    /* ==============EDIT TREATMENT=============== */
-  }
+  /* ==============EDIT TREATMENT=============== */
   const handleSubmitEditTreatment = (event) => {
     event.preventDefault();
 
@@ -28,9 +26,8 @@ const EditTreatment = (props) => {
       .catch((error) => console.log(error));
   };
 
-  {
-    /* ==============EDIT TREATMENT=============== */
-  }
+  /* ==============EDIT TREATMENT=============== */
+
   const handleChangeEdit = (event) => {
     const { name, value } = event.target;
     setEditedTreatment({ ...editTreatment, [name]: value });

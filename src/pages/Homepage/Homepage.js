@@ -16,15 +16,10 @@ const Homepage = () => {
 
   const { appointments } = useContext(AppointmentsContext);
 
-  {
-    /* ==============APPOINTMENTS=============== */
-  }
-
+  /* ==============APPOINTMENTS=============== */
   const currentDate = moment().format("dddd Do MMMM YYYY");
 
-  {
-    /* ==============TODOS=============== */
-  }
+  /* ==============TODOS=============== */
   const fetchTodos = () => {
     axios
       .get("/todos")
@@ -32,10 +27,7 @@ const Homepage = () => {
       .catch((error) => alert(error));
   };
 
-  {
-    /* ==============DELETE TODOS=============== */
-  }
-
+  /* ==============DELETE TODOS=============== */
   const handleDelete = (todoId) => {
     axios
       .delete(`/todos/${todoId}`)
@@ -46,9 +38,7 @@ const Homepage = () => {
       .catch((error) => alert(error));
   };
 
-  {
-    /* ==============ADD TODO=============== */
-  }
+  /* ==============ADD TODO=============== */
   const handleAddNewTodo = (event) => {
     const { name, value } = event.target;
     setAddNewTodo({ [name]: value });
@@ -75,15 +65,15 @@ const Homepage = () => {
             (appointment) =>
               moment(appointment.appointment_date).format(
                 "dddd Do MMMM YYYY"
-              ) === moment().format("dddd Do MMMM YYYY")
+              ) === moment.utc(moment()).format("dddd Do MMMM YYYY")
           )
           .map((appointment) => (
-            <div>
+            <button key={appointment.appointments_id}>
               <p>{moment(appointment.appointment_date).format("HH:mm")}</p>
               <p>
                 {appointment.firstname} {appointment.lastname}
               </p>
-            </div>
+            </button>
           ))}
       </div>
 
