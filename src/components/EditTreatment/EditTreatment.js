@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 
 const EditTreatment = (props) => {
-  const { name, price, setTreatments, treatments, id } = props;
+  const { name, price, treatments, id } = props;
   const [isEditModeActive, setIsEditModeActive] = useState(false);
   const [editTreatment, setEditedTreatment] = useState({
     id: id,
     name: name,
     price: price,
   });
+
+  const { setTreatments } = useContext(TreatmentsContext);
 
   /* ==============EDIT TREATMENT=============== */
   const handleSubmitEditTreatment = (event) => {

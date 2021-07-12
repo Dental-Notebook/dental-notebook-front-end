@@ -97,9 +97,12 @@ const Homepage = () => {
             <button type="submit">ADD</button>
             <button onClick={() => setIsAddNewTodoShown(false)}>CANCEL</button>
           </form>
-        ) : null}
+        ) : (
+          <button onClick={() => setIsAddNewTodoShown(true)}>
+            + Add to do
+          </button>
+        )}
       </div>
-      <button onClick={() => setIsAddNewTodoShown(true)}>+ Add to do</button>
     </div>
   );
 };
