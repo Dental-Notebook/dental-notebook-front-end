@@ -55,6 +55,13 @@ const Homepage = () => {
       .catch((error) => alert(error));
   };
 
+  const handleClickAddTodoButton = () => {
+    setIsAddNewTodoShown(true);
+    setAddNewTodo({
+      todo_item: "",
+    });
+  };
+
   return (
     <div>
       <h1>{currentDate}</h1>
@@ -98,9 +105,7 @@ const Homepage = () => {
             <button onClick={() => setIsAddNewTodoShown(false)}>CANCEL</button>
           </form>
         ) : (
-          <button onClick={() => setIsAddNewTodoShown(true)}>
-            + Add to do
-          </button>
+          <button onClick={handleClickAddTodoButton}>+ Add to do</button>
         )}
       </div>
     </div>
