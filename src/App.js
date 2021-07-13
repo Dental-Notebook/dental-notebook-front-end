@@ -8,23 +8,26 @@ import Earnings from "./pages/Earnings/Earnings";
 import TreatmentsList from "./pages/TreatmentsList/TreatmentsList";
 import AppointmentsProvider from "./contexts/AppointmentsContext";
 import TreatmentsProvider from "./contexts/TreatmentsContext";
+import PatientsProvider from "./contexts/PatientsContext";
 
 function App() {
   return (
     <div className="App">
-      <TreatmentsProvider>
-        <AppointmentsProvider>
-          <Switch>
-            <Route exact path="/" component={Homepage} />
-            <Route path="/add-new-patient" component={AddNewPatient} />
-            <Route path="/patients" component={Patients} />
-            <Route path="/appointments" component={Appointments} />
-            <Route path="/earnings" component={Earnings} />
-            <Route path="/price-list" component={TreatmentsList} />
-            <Redirect to="/" />
-          </Switch>
-        </AppointmentsProvider>
-      </TreatmentsProvider>
+      <PatientsProvider>
+        <TreatmentsProvider>
+          <AppointmentsProvider>
+            <Switch>
+              <Route exact path="/" component={Homepage} />
+              <Route path="/add-new-patient" component={AddNewPatient} />
+              <Route path="/patients" component={Patients} />
+              <Route path="/appointments" component={Appointments} />
+              <Route path="/earnings" component={Earnings} />
+              <Route path="/price-list" component={TreatmentsList} />
+              <Redirect to="/" />
+            </Switch>
+          </AppointmentsProvider>
+        </TreatmentsProvider>
+      </PatientsProvider>
     </div>
   );
 }
