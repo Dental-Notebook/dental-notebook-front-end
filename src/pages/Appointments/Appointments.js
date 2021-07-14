@@ -5,10 +5,12 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import AddAppointment from "../../components/AddAppointment/AddAppointment";
+import EditAppointment from "../../components/EditAppointment/EditAppointment";
 
 const Appointments = () => {
   const [calendarDate, setCalendarDate] = useState(new Date());
   const { appointments, setAppointments } = useContext(AppointmentsContext);
+  const [isEditModeActive, setIsEditModeActive] = useState(false);
 
   /* ==============DELETE APPOINTMENTS=============== */
   const handleDeleteAppointment = (appointmentId) => {
@@ -27,6 +29,7 @@ const Appointments = () => {
     <div>
       <h1>Appointments</h1>
       <Calendar onChange={setCalendarDate} value={calendarDate} />
+
       {appointments
         .filter(
           (appointment) =>
@@ -34,8 +37,8 @@ const Appointments = () => {
             moment(calendarDate).format("dddd Do MMMM YYYY")
         )
         .map((appointment) => (
-          <div>
-            <button key={appointment.appointments_id}>
+          <div key={appointment.appointments_id}>
+            <button onClick={() => setIsEditModeActive(true)}>
               <p>{moment(appointment.appointment_date).format("HH:mm")}</p>
               <p>
                 {appointment.firstname} {appointment.lastname}
@@ -48,6 +51,12 @@ const Appointments = () => {
             >
               X
             </button>
+            {isEditModeActive ? (
+              <EditAppointment
+                {...appointment}
+                setIsEditModeActive={setIsEditModeActive}
+              />
+            ) : null}
           </div>
         ))}
       <AddAppointment />
