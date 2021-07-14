@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import axios from "axios";
 import moment from "moment";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
@@ -7,7 +8,20 @@ import AddAppointment from "../../components/AddAppointment/AddAppointment";
 
 const Appointments = () => {
   const [calendarDate, setCalendarDate] = useState(new Date());
-  const { appointments } = useContext(AppointmentsContext);
+  const { appointments, setAppointments } = useContext(AppointmentsContext);
+
+  /* ==============DELETE APPOINTMENTS=============== */
+  const handleDeleteAppointment = (appointmentId) => {
+    axios
+      .delete(`/appointments/${appointmentId}`)
+      .then((response) => {
+        const filteredAppointments = appointments.filter(
+          (appointment) => appointment.appointments_id !== appointmentId
+        );
+        setAppointments(filteredAppointments);
+      })
+      .catch((error) => alert(error));
+  };
 
   return (
     <div>
@@ -20,12 +34,21 @@ const Appointments = () => {
             moment(calendarDate).format("dddd Do MMMM YYYY")
         )
         .map((appointment) => (
-          <button key={appointment.appointments_id}>
-            <p>{moment(appointment.appointment_date).format("HH:mm")}</p>
-            <p>
-              {appointment.firstname} {appointment.lastname}
-            </p>
-          </button>
+          <div>
+            <button key={appointment.appointments_id}>
+              <p>{moment(appointment.appointment_date).format("HH:mm")}</p>
+              <p>
+                {appointment.firstname} {appointment.lastname}
+              </p>
+            </button>
+            <button
+              onClick={() =>
+                handleDeleteAppointment(appointment.appointments_id)
+              }
+            >
+              X
+            </button>
+          </div>
         ))}
       <AddAppointment />
     </div>
