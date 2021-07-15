@@ -11,6 +11,7 @@ const Appointments = () => {
   const [calendarDate, setCalendarDate] = useState(new Date());
   const { appointments, setAppointments } = useContext(AppointmentsContext);
   const [isEditModeActive, setIsEditModeActive] = useState(false);
+  const [appointmentId, setAppointmentId] = useState(0);
 
   /* ==============DELETE APPOINTMENTS=============== */
   const handleDeleteAppointment = (appointmentId) => {
@@ -23,6 +24,11 @@ const Appointments = () => {
         setAppointments(filteredAppointments);
       })
       .catch((error) => alert(error));
+  };
+
+  const handleAppointmentIdOnClick = (id) => {
+    setAppointmentId(id);
+    setIsEditModeActive(true);
   };
 
   return (
@@ -38,7 +44,11 @@ const Appointments = () => {
         )
         .map((appointment) => (
           <div key={appointment.appointments_id}>
-            <button onClick={() => setIsEditModeActive(true)}>
+            <button
+              onClick={() =>
+                handleAppointmentIdOnClick(appointment.appointments_id)
+              }
+            >
               <p>{moment(appointment.appointment_date).format("HH:mm")}</p>
               <p>
                 {appointment.firstname} {appointment.lastname}
@@ -51,7 +61,8 @@ const Appointments = () => {
             >
               X
             </button>
-            {isEditModeActive ? (
+            {isEditModeActive &&
+            appointment.appointments_id === appointmentId ? (
               <EditAppointment
                 {...appointment}
                 setIsEditModeActive={setIsEditModeActive}
