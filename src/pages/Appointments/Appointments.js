@@ -12,6 +12,8 @@ const Appointments = () => {
   const { appointments, setAppointments } = useContext(AppointmentsContext);
   const [isEditModeActive, setIsEditModeActive] = useState(false);
   const [appointmentId, setAppointmentId] = useState(0);
+  const [isAddNewAppointmentShown, setIsAddNewAppointmentShown] =
+    useState(false);
 
   /* ==============DELETE APPOINTMENTS=============== */
   const handleDeleteAppointment = (appointmentId) => {
@@ -35,7 +37,6 @@ const Appointments = () => {
     <div>
       <h1>Appointments</h1>
       <Calendar onChange={setCalendarDate} value={calendarDate} />
-
       {appointments
         .filter(
           (appointment) =>
@@ -70,7 +71,15 @@ const Appointments = () => {
             ) : null}
           </div>
         ))}
-      <AddAppointment />
+      {isAddNewAppointmentShown ? (
+        <AddAppointment
+          setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
+        />
+      ) : (
+        <button onClick={() => setIsAddNewAppointmentShown(true)}>
+          ADD APPOINTMENT
+        </button>
+      )}
     </div>
   );
 };

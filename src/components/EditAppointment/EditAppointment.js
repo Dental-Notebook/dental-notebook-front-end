@@ -28,14 +28,8 @@ const EditAppointment = (props) => {
   const { appointments, setAppointments } = useContext(AppointmentsContext);
   const { treatments } = useContext(TreatmentsContext);
 
-  /* 
-  console.log("appointment_treatments", props.treatments);
-  console.log("treatments", treatments);
-  console.log("editedAppointment", editedAppointment);
-*/
-
   const handleEditTreatmentToAppointment = (event) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
 
     if (value === "") return;
 

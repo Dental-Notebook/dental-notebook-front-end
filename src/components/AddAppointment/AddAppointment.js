@@ -5,9 +5,7 @@ import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import { PatientsContext } from "../../contexts/PatientsContext";
 
-const AddAppointment = () => {
-  const [isAddNewAppointmentShown, setIsAddNewAppointmentShown] =
-    useState(false);
+const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
   const [newAppointment, setNewAppointment] = useState({
     patient_id: 0,
     appointment_treatments: [],
@@ -20,8 +18,7 @@ const AddAppointment = () => {
 
   const handleAddNewAppointment = (event) => {
     const { name, value } = event.target;
-    console.log("name", name);
-    console.log("value", value);
+
     setNewAppointment({ ...newAppointment, [name]: value });
   };
 
@@ -86,70 +83,61 @@ const AddAppointment = () => {
   return (
     <div>
       {/* ==============ADD APPOINTMENT=============== */}
-      {isAddNewAppointmentShown ? (
-        <div>
-          <h1>Add New Appointment</h1>
-          <form onSubmit={handleSubmitAddAppointment}>
-            <select
-              name="patient_id"
-              onChange={handleAddNewAppointment}
-              required
-            >
-              <option value="">Select patient</option>
-              {patients.map((patient) => (
-                <option key={patient.patient_id} value={patient.patient_id}>
-                  {patient.firstname} {patient.lastname} | {patient.phone}
+
+      <div>
+        <h1>Add New Appointment</h1>
+        <form onSubmit={handleSubmitAddAppointment}>
+          <select name="patient_id" onChange={handleAddNewAppointment} required>
+            <option value="">Select patient</option>
+            {patients.map((patient) => (
+              <option key={patient.patient_id} value={patient.patient_id}>
+                {patient.firstname} {patient.lastname} | {patient.phone}
+              </option>
+            ))}
+          </select>
+
+          <label>
+            Treatment:
+            <select onChange={handleAddTreatmentToAppointment} required>
+              <option value="">Select treatment</option>
+              {treatments.map((treatment) => (
+                <option key={treatment.id} value={treatment.id}>
+                  {treatment.name}
                 </option>
               ))}
             </select>
-
-            <label>
-              Treatment:
-              <select onChange={handleAddTreatmentToAppointment} required>
-                <option value="">Select treatment</option>
-                {treatments.map((treatment) => (
-                  <option key={treatment.id} value={treatment.id}>
-                    {treatment.name}
-                  </option>
-                ))}
-              </select>
-              <div>
-                {treatments.map(
-                  (treatment) =>
-                    newAppointment.appointment_treatments.includes(
-                      treatment.id.toString()
-                    ) && (
-                      <React.Fragment key={treatment.id}>
-                        <p>{treatment.name}</p>
-                        <button
-                          style={{ backgroundColor: "coral" }}
-                          onClick={() =>
-                            handleDeleteTreatmentFromAppointment(treatment.id)
-                          }
-                        >
-                          x
-                        </button>
-                      </React.Fragment>
-                    )
-                )}
-              </div>
-            </label>
-            <input
-              value={newAppointment.appointment_date}
-              onChange={handleAddNewAppointment}
-              name="appointment_date"
-              type="datetime-local"
-              required
-            />
-            <button type="submit">SAVE</button>
-            <button onClick={handleCancel}>CANCEL</button>
-          </form>
-        </div>
-      ) : (
-        <button onClick={() => setIsAddNewAppointmentShown(true)}>
-          ADD APPOINTMENT
-        </button>
-      )}
+            <div>
+              {treatments.map(
+                (treatment) =>
+                  newAppointment.appointment_treatments.includes(
+                    treatment.id.toString()
+                  ) && (
+                    <React.Fragment key={treatment.id}>
+                      <p>{treatment.name}</p>
+                      <button
+                        style={{ backgroundColor: "coral" }}
+                        onClick={() =>
+                          handleDeleteTreatmentFromAppointment(treatment.id)
+                        }
+                      >
+                        x
+                      </button>
+                    </React.Fragment>
+                  )
+              )}
+            </div>
+          </label>
+          <input
+            value={newAppointment.appointment_date}
+            onChange={handleAddNewAppointment}
+            name="appointment_date"
+            type="datetime-local"
+            required
+          />
+          <button type="submit">SAVE</button>
+          <button onClick={handleCancel}>CANCEL</button>
+        </form>
+      </div>
     </div>
   );
 };

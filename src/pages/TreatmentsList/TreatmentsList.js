@@ -10,7 +10,6 @@ const TreatmentsList = () => {
     treatments,
     setTreatments,
     newTreatment,
-    setNewTreatment,
     isAddNewTreatmentShown,
     setIsAddNewTreatmentShown,
   } = useContext(TreatmentsContext);

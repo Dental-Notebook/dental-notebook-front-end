@@ -9,6 +9,7 @@ import TreatmentsList from "./pages/TreatmentsList/TreatmentsList";
 import AppointmentsProvider from "./contexts/AppointmentsContext";
 import TreatmentsProvider from "./contexts/TreatmentsContext";
 import PatientsProvider from "./contexts/PatientsContext";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <PatientsProvider>
         <TreatmentsProvider>
           <AppointmentsProvider>
+            <Navbar />
             <Switch>
               <Route exact path="/" component={Homepage} />
               <Route path="/add-new-patient" component={AddNewPatient} />

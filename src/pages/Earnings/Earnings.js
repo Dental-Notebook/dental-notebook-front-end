@@ -59,7 +59,7 @@ const Earnings = () => {
           earningsByDate.map(function (earn, index) {
             if (index === 0) {
               return (
-                <div>
+                <div key={index}>
                   <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
                   <p>
                     {earn.name} {earn.treatments_earnings}
@@ -73,7 +73,7 @@ const Earnings = () => {
               )
             ) {
               return (
-                <div>
+                <div key={index}>
                   <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
                   <p>
                     {earn.name} {earn.treatments_earnings}
@@ -82,7 +82,7 @@ const Earnings = () => {
               );
             } else {
               return (
-                <div>
+                <div key={index}>
                   <p>
                     {earn.name} {earn.treatments_earnings}
                   </p>
