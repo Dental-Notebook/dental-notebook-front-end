@@ -133,7 +133,6 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
             name="appointment_date"
             type="datetime-local"
             required
-            min={moment(moment()).format("YYYY-MM-DDTHH:mm:ss")}
           />
           <button type="submit">SAVE</button>
           <button onClick={handleCancel}>CANCEL</button>
