@@ -38,6 +38,7 @@ const Appointments = () => {
       <h1>Appointments</h1>
       <Calendar onChange={setCalendarDate} value={calendarDate} />
       {appointments
+        .sort((a, b) => (a.appointment_date > b.appointment_date ? 1 : -1))
         .filter(
           (appointment) =>
             moment(appointment.appointment_date).format("dddd Do MMMM YYYY") ===
