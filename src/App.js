@@ -1,3 +1,4 @@
+import "./reset.css";
 import "./App.css";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Homepage from "./pages/Homepage/Homepage";

@@ -25,6 +25,7 @@
   overflow: hidden;
   max-width: 290px;
   z-index: 9;
+  transition: width 1s ease-in-out;
 }
 
 .menuNav.showMenu {
