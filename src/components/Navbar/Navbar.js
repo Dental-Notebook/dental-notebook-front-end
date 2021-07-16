@@ -45,7 +45,7 @@ const Navbar = () => {
             className="active-link"
             onClick={() => closeMenu()}
           >
-            Apointments
+            Appointments
           </Link>
         </li>
         <li>

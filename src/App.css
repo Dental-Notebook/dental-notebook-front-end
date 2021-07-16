@@ -10,6 +10,13 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+/* GENERAL STYLES */
+button,
+input {
+  font-family: "Roboto", sans-serif;
+}
+/* GENERAL STYLES END */
+
 .App {
   text-align: center;
 }
