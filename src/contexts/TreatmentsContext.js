@@ -49,6 +49,10 @@ const TreatmentsProvider = (props) => {
       .then((response) => {
         setTreatments([...treatments, response.data]);
         setIsAddNewTreatmentShown(false);
+        setNewTreatment({
+          name: "",
+          price: "",
+        });
       })
       .catch((error) => alert(error));
   };
