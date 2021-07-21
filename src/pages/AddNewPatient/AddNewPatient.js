@@ -2,9 +2,12 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import moment from "moment";
 import { PatientsContext } from "../../contexts/PatientsContext";
+import teethmap from "../../assets/teethmap.png";
+import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 
 const AddNewPatient = () => {
   const { patients, setPatients } = useContext(PatientsContext);
+  const { treatments } = useContext(TreatmentsContext);
 
   const [newPatient, setNewPatient] = useState({
     firstname: "",
@@ -12,7 +15,7 @@ const AddNewPatient = () => {
     phone: "",
     email: "",
     occupation: "",
-    age: "",
+    birth_date: moment().format("YYYY-MM-DD"),
     created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
     gender: "",
     has_hbd: false,
@@ -23,15 +26,36 @@ const AddNewPatient = () => {
     alergies: "",
   });
 
+  const [newPatientTreatments, setNewPatientTreatments] = useState([]);
+  const [newPatientTreatmentsForm, setNewPatientTreatmentsForm] = useState({
+    teeth_map_id: "",
+    treatments_id: "",
+    tooth: "",
+    dental_status: "",
+  });
+
+  const teethTreatmentsArrDropdown = [
+    11, 12, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33,
+    34, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48,
+  ];
+  {
+    /*------------- New patient --------------*/
+  }
   const handleSubmitNewPatient = (event) => {
     event.preventDefault();
-    /* axios
+    axios
       .post("/patients", newPatient)
       .then((response) => {
-        setPatients([...patients, response.data]);
+        {
+          newPatientTreatments.map((treatment) =>
+            axios
+              .post("/patients/teeth-treatments", treatment)
+              .then((response) => console.log(response.data))
+          );
+        }
       })
-      .catch((error) => alert(error)); */
-    console.log(newPatient);
+      .catch((error) => alert(error));
+    //console.log(newPatient);
   };
 
   const handleChangeNewPatient = (event) => {
@@ -43,10 +67,29 @@ const AddNewPatient = () => {
     const { name, checked } = event.target;
     setNewPatient({ ...newPatient, [name]: checked });
   };
+  {
+    /*------------- Teeth Map --------------*/
+  }
+  const handleSubmitNewPatientTeethMap = (event) => {
+    event.preventDefault();
+    newPatientTreatments.push(newPatientTreatmentsForm);
+    setNewPatientTreatmentsForm({
+      teeth_map_id: "",
+      treatments_id: "",
+      tooth: "",
+      dental_status: "",
+    });
+  };
+
+  const handleChangeNewPatientTeethMap = (event) => {
+    const { name, value } = event.target;
+    setNewPatientTreatmentsForm({ ...newPatientTreatmentsForm, [name]: value });
+  };
 
   return (
     <div>
       <div>
+        {/*------------- New patient --------------*/}
         <form onSubmit={handleSubmitNewPatient}>
           <h3>Personal information</h3>
           <input
@@ -85,13 +128,12 @@ const AddNewPatient = () => {
             required
           />
           <input
-            name="age"
-            value={newPatient.age}
-            placeholder="Age"
-            type="number"
+            name="birth_date"
+            value={newPatient.birth_date}
+            placeholder="Birth Date"
+            type="datetime-local"
             onChange={handleChangeNewPatient}
             required
-            min="0"
           />
           <select name="gender" onChange={handleChangeNewPatient} required>
             <option value="">Gender</option>
@@ -144,9 +186,58 @@ const AddNewPatient = () => {
             placeholder="Active Medication"
             onChange={handleChangeNewPatient}
           />
-
           <button type="submit">submit</button>
         </form>
+        {/*------------- Teeth Map --------------*/}
+        <div>
+          <h3>Teeth Map</h3>
+          <img src={teethmap} alt="teeth map" />
+          {newPatientTreatments.map((treatment) => (
+            <div>
+              <p>{treatment.tooth}</p>
+              <p>{treatment.dental_status}</p>
+              {treatments.map((item) =>
+                Number(treatment.treatments_id) === item.id ? (
+                  <p>{item.name}</p>
+                ) : null
+              )}
+            </div>
+          ))}
+
+          <form onSubmit={handleSubmitNewPatientTeethMap}>
+            <select
+              name="tooth"
+              value={newPatientTreatmentsForm.tooth}
+              onChange={handleChangeNewPatientTeethMap}
+            >
+              <option value="">Tooth</option>
+              {teethTreatmentsArrDropdown.map((teeth) => (
+                <option key={teeth.id} value={teeth}>
+                  {teeth}
+                </option>
+              ))}
+            </select>
+            <input
+              name="dental_status"
+              value={newPatientTreatmentsForm.dental_status}
+              placeholder="Dental status"
+              onChange={handleChangeNewPatientTeethMap}
+            />
+            <select
+              value={newPatientTreatmentsForm.treatments_id}
+              name="treatments_id"
+              onChange={handleChangeNewPatientTeethMap}
+            >
+              <option value="">Treatment</option>
+              {treatments.map((treatment) => (
+                <option key={treatment.id} value={treatment.id}>
+                  {treatment.name}
+                </option>
+              ))}
+            </select>
+            <button type="submit">+ New Line</button>
+          </form>
+        </div>
       </div>
     </div>
   );
