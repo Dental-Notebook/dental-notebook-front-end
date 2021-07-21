@@ -5,7 +5,7 @@ import { PatientsContext } from "../../contexts/PatientsContext";
 import teethmap from "../../assets/teethmap.png";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 
-const AddNewPatient = () => {
+const AddNewPatient = (props) => {
   const { patients, setPatients } = useContext(PatientsContext);
   const { treatments } = useContext(TreatmentsContext);
 
@@ -46,13 +46,29 @@ const AddNewPatient = () => {
     axios
       .post("/patients", newPatient)
       .then((response) => {
-        {
-          newPatientTreatments.map((treatment) =>
-            axios
-              .post("/patients/teeth-treatments", treatment)
-              .then((response) => console.log(response.data))
+        const newPatient = response.data[0];
+        const newPatientTeethTreatmentsPromises = [];
+
+        newPatientTreatments.map((treatment) => {
+          const newTreatment = {
+            ...treatment,
+            teeth_map_id: response.data[0].teeth_map_id,
+          };
+
+          const teethTreatmentPost = axios.post(
+            "/patients/teeth-treatments",
+            newTreatment
           );
-        }
+
+          newPatientTeethTreatmentsPromises.push(teethTreatmentPost);
+        });
+
+        Promise.all(newPatientTeethTreatmentsPromises).then((items) => {
+          const newPatientTeethTreatments = items.map((item) => item.data);
+          newPatient.teeth_treatments = newPatientTeethTreatments;
+          setPatients([...patients, newPatient]);
+          props.history.push("/patients");
+        });
       })
       .catch((error) => alert(error));
     //console.log(newPatient);
@@ -131,7 +147,7 @@ const AddNewPatient = () => {
             name="birth_date"
             value={newPatient.birth_date}
             placeholder="Birth Date"
-            type="datetime-local"
+            type="date"
             onChange={handleChangeNewPatient}
             required
           />
