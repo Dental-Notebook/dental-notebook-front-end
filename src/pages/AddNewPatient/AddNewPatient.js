@@ -15,7 +15,7 @@ const AddNewPatient = (props) => {
     phone: "",
     email: "",
     occupation: "",
-    birth_date: moment().format("YYYY-MM-DD"),
+    birth_date: "",
     created_at: moment().format("YYYY-MM-DD HH:mm:ss"),
     gender: "",
     has_hbd: false,
@@ -143,6 +143,7 @@ const AddNewPatient = (props) => {
             onChange={handleChangeNewPatient}
             required
           />
+          <label htmlFor="birth_date">Date of Birth</label>
           <input
             name="birth_date"
             value={newPatient.birth_date}
@@ -150,6 +151,7 @@ const AddNewPatient = (props) => {
             type="date"
             onChange={handleChangeNewPatient}
             required
+            id="birth_date"
           />
           <select name="gender" onChange={handleChangeNewPatient} required>
             <option value="">Gender</option>

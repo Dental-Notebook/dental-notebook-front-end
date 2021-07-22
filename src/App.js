@@ -11,6 +11,7 @@ import AppointmentsProvider from "./contexts/AppointmentsContext";
 import TreatmentsProvider from "./contexts/TreatmentsContext";
 import PatientsProvider from "./contexts/PatientsContext";
 import Navbar from "./components/Navbar/Navbar";
+import EditViewPatient from "./pages/EditViewPatient/EditViewPatient";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
             <Switch>
               <Route exact path="/" component={Homepage} />
               <Route path="/add-new-patient" component={AddNewPatient} />
-              <Route path="/patients" component={Patients} />
+              <Route exact path="/patients" component={Patients} />
+              <Route path="/patients/:id" component={EditViewPatient} />
               <Route path="/appointments" component={Appointments} />
               <Route path="/earnings" component={Earnings} />
               <Route path="/price-list" component={TreatmentsList} />
