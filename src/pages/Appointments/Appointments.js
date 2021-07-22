@@ -17,15 +17,21 @@ const Appointments = () => {
 
   /* ==============DELETE APPOINTMENTS=============== */
   const handleDeleteAppointment = (appointmentId) => {
-    axios
-      .delete(`/appointments/${appointmentId}`)
-      .then((response) => {
-        const filteredAppointments = appointments.filter(
-          (appointment) => appointment.appointments_id !== appointmentId
-        );
-        setAppointments(filteredAppointments);
-      })
-      .catch((error) => alert(error));
+    const deleteConfirmation = window.confirm(
+      "Are you sure you want to delete this appointment?"
+    );
+
+    if (deleteConfirmation) {
+      axios
+        .delete(`/appointments/${appointmentId}`)
+        .then((response) => {
+          const filteredAppointments = appointments.filter(
+            (appointment) => appointment.appointments_id !== appointmentId
+          );
+          setAppointments(filteredAppointments);
+        })
+        .catch((error) => alert(error));
+    }
   };
 
   const handleAppointmentIdOnClick = (id) => {

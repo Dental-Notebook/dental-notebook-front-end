@@ -4,10 +4,12 @@ import moment from "moment";
 import { PatientsContext } from "../../contexts/PatientsContext";
 import teethmap from "../../assets/teethmap.png";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
+import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 
 const EditViewPatient = (props) => {
   const { patients, setPatients } = useContext(PatientsContext);
   const { treatments } = useContext(TreatmentsContext);
+  const { appointments } = useContext(AppointmentsContext);
 
   const [viewEditPatient, setViewEditPatient] = useState({
     firstname: "",
@@ -48,15 +50,60 @@ const EditViewPatient = (props) => {
       (patient) => patient.patient_id === patientViewEditId
     );
     if (foundPatient) {
-      const { teeth_treatments, ...patientInfo } = foundPatient;
+      const { teeth_treatments, created_at, ...patientInfo } = foundPatient;
       setViewEditPatient(patientInfo);
-      setViewEditPatientTreatments(teeth_treatments);
+      setViewEditPatientTreatments(
+        teeth_treatments.map((item) => ({ ...item, alreadyExists: true }))
+      );
     }
   }, [patients]);
 
   const handleSubmitViewEditPatient = (event) => {
     event.preventDefault();
+
+    const patientId = Number(props.match.params.id);
+
+    viewEditPatient.birth_date = moment(viewEditPatient.birth_date).format(
+      "YYYY-MM-DD"
+    );
+
+    axios
+      .put(`/patients/${patientId}`, viewEditPatient)
+      .then((response) => {
+        const updatedPatient = response.data[0];
+        const updatedPatientTeethTreatmentsPromises = [];
+
+        viewEditPatientTreatments
+          .filter((treatment) => !treatment.alreadyExists)
+          .map((treatment) => {
+            const newTreatment = {
+              ...treatment,
+              teeth_map_id: response.data[0].teeth_map_id,
+            };
+
+            const teethTreatmentPost = axios.post(
+              "/patients/teeth-treatments",
+              newTreatment
+            );
+
+            updatedPatientTeethTreatmentsPromises.push(teethTreatmentPost);
+          });
+
+        Promise.all(updatedPatientTeethTreatmentsPromises).then((items) => {
+          items.map((item) => updatedPatient.teeth_treatments.push(item.data));
+          const patientsWithEditedInfo = patients.map((patient) =>
+            patient.patient_id === Number(props.match.params.id)
+              ? updatedPatient
+              : patient
+          );
+          setPatients(patientsWithEditedInfo);
+          alert("Patient information has been updated");
+          props.history.push("/patients");
+        });
+      })
+      .catch((error) => alert(error));
   };
+
   const handleChangeViewEditPatient = (event) => {
     const { name, value } = event.target;
     setViewEditPatient({ ...viewEditPatient, [name]: value });
@@ -91,16 +138,24 @@ const EditViewPatient = (props) => {
   };
 
   const deleteTeethTreatmentHandler = (teethTreatmentId) => {
-    axios
-      .delete(`/patients/teeth-treatments/${teethTreatmentId}`)
-      .then((response) => {
-        const filteredTeethTreatments = viewEditPatientTreatments.filter(
-          (treatment) =>
-            treatment.teeth_treatment_id !== Number(teethTreatmentId)
-        );
-        setViewEditPatientTreatments(filteredTeethTreatments);
-      });
+    const deleteTeethTreatmentConfirm = window.confirm(
+      "Are you sure you want to delete this treatment?"
+    );
+
+    if (deleteTeethTreatmentConfirm) {
+      axios
+        .delete(`/patients/teeth-treatments/${teethTreatmentId}`)
+        .then((response) => {
+          const filteredTeethTreatments = viewEditPatientTreatments.filter(
+            (treatment) =>
+              treatment.teeth_treatment_id !== Number(teethTreatmentId)
+          );
+          setViewEditPatientTreatments(filteredTeethTreatments);
+        });
+    }
   };
+
+  console.log(appointments);
 
   return (
     <div>
@@ -213,12 +268,12 @@ const EditViewPatient = (props) => {
         <h3>Teeth Map</h3>
         <img src={teethmap} alt="teeth map" />
         {viewEditPatientTreatments.map((treatment) => (
-          <div>
+          <div key={treatment.treatments_id}>
             <p>{treatment.tooth}</p>
             <p>{treatment.dental_status}</p>
             {treatments.map((item) =>
               Number(treatment.treatments_id) === item.id ? (
-                <p>{item.name}</p>
+                <p key={item.id}>{item.name}</p>
               ) : null
             )}
             <button
@@ -238,9 +293,9 @@ const EditViewPatient = (props) => {
             onChange={handleChangeViewEditPatientTeethMap}
           >
             <option value="">Tooth</option>
-            {teethTreatmentsArrDropdown.map((teeth) => (
-              <option key={teeth.id} value={teeth}>
-                {teeth}
+            {teethTreatmentsArrDropdown.map((tooth) => (
+              <option key={tooth} value={tooth}>
+                {tooth}
               </option>
             ))}
           </select>
@@ -264,6 +319,26 @@ const EditViewPatient = (props) => {
           </select>
           <button type="submit">+ New Line</button>
         </form>
+      </div>
+      <div>
+        <h3>Appointments</h3>
+        {appointments.length &&
+          appointments
+            .filter((item) => item.patient_id === Number(props.match.params.id))
+            .map((element, index) => (
+              <div key={index}>
+                <p>{moment(element.appointment_date).format("HH:mm")}</p>
+                <p>{moment(element.appointment_date).format("DD/MM/YYYY")}</p>
+                <div>
+                  <p>Appointment for</p>
+                  <ul>
+                    {element.treatments.map((item) => (
+                      <li key={item.id}>{item.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
       </div>
     </div>
   );

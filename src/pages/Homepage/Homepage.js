@@ -42,13 +42,19 @@ const Homepage = () => {
 
   /* ==============DELETE TODOS=============== */
   const handleDelete = (todoId) => {
-    axios
-      .delete(`/todos/${todoId}`)
-      .then((response) => {
-        const filteredTodos = todos.filter((todo) => todo.id !== todoId);
-        setTodos(filteredTodos);
-      })
-      .catch((error) => alert(error));
+    const deleteConfirmation = window.confirm(
+      "Are you sure you want to delete this to do item?"
+    );
+
+    if (deleteConfirmation) {
+      axios
+        .delete(`/todos/${todoId}`)
+        .then((response) => {
+          const filteredTodos = todos.filter((todo) => todo.id !== todoId);
+          setTodos(filteredTodos);
+        })
+        .catch((error) => alert(error));
+    }
   };
 
   /* ==============ADD TODO=============== */
