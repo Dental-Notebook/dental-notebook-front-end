@@ -16,7 +16,7 @@ const EditAppointment = (props) => {
 
   const [editedAppointment, setEditedAppointment] = useState({
     patient_id: props.patient_id,
-    appointment_id: props.appointment_id,
+    appointment_id: props.appointments_id,
     firstname: props.firstname,
     lastname: props.lastname,
     phone: props.phone,
@@ -37,12 +37,19 @@ const EditAppointment = (props) => {
       (treatment) => treatment.id === Number(value)
     );
     const treatmentExistInAppointment = editedAppointment.treatments.find(
-      (item) => item.id === treatmentToAdd.id
+      (item) => item.treatments_id === treatmentToAdd.id
     );
     if (!treatmentExistInAppointment) {
       setEditedAppointment({
         ...editedAppointment,
-        treatments: [...editedAppointment.treatments, treatmentToAdd],
+        treatments: [
+          ...editedAppointment.treatments,
+          {
+            treatments_id: treatmentToAdd.id,
+            treatment_price: treatmentToAdd.price,
+            name: treatmentToAdd.name,
+          },
+        ],
       });
     }
   };
@@ -50,9 +57,10 @@ const EditAppointment = (props) => {
   const handleSubmitEditTreatment = (event) => {
     event.preventDefault();
 
-    const treatmentsArrayToEdit = editedAppointment.treatments.map(
-      (item) => item.id
-    );
+    const treatmentsArrayToEdit = editedAppointment.treatments.map((item) => ({
+      treatments_id: item.treatments_id,
+      treatment_price: item.treatment_price,
+    }));
 
     const appointmentToPut = {
       treatments: treatmentsArrayToEdit,

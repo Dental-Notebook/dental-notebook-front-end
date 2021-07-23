@@ -46,14 +46,23 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
 
   const handleAddTreatmentToAppointment = (event) => {
     const treatmentNotInAppointments =
-      !newAppointment.appointment_treatments.includes(event.target.value);
+      !newAppointment.appointment_treatments.find(
+        (item) => item.treatment_id === Number(event.target.value)
+      );
 
     if (event.target.value !== "" && treatmentNotInAppointments) {
+      const treatmentToAdd = treatments.find(
+        (treatment) => treatment.id === Number(event.target.value)
+      );
+
       setNewAppointment({
         ...newAppointment,
         appointment_treatments: [
           ...newAppointment.appointment_treatments,
-          event.target.value,
+          {
+            treatment_id: treatmentToAdd.id,
+            treatment_price: treatmentToAdd.price,
+          },
         ],
       });
     }
@@ -72,7 +81,7 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
   const handleDeleteTreatmentFromAppointment = (treatmentId) => {
     const filteredAppointmentTreatments =
       newAppointment.appointment_treatments.filter(
-        (treatment) => treatment !== treatmentId.toString()
+        (item) => item.treatment_id !== treatmentId
       );
     setNewAppointment({
       ...newAppointment,
@@ -109,8 +118,8 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
             <div>
               {treatments.map(
                 (treatment) =>
-                  newAppointment.appointment_treatments.includes(
-                    treatment.id.toString()
+                  newAppointment.appointment_treatments.find(
+                    (item) => treatment.id === item.treatment_id
                   ) && (
                     <React.Fragment key={treatment.id}>
                       <p>{treatment.name}</p>
