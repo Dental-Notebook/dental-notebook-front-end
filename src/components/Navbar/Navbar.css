@@ -1,3 +1,15 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  background-color: #25a4cc;
+  padding: 25px 0 15px;
+}
+
+.logo-container img {
+  width: 70%;
+}
+
 .navBar {
   position: relative;
 }
@@ -17,7 +29,7 @@
   list-style: none;
   position: fixed;
   top: 0;
-  background: darkcyan;
+  background: #25a4cc;
   left: 0;
   bottom: 0;
   height: 100vh;
@@ -32,12 +44,94 @@
   width: 100%;
 }
 
-a {
+/* .navBar-lines {
+  display: block;
+  position: relative;
+  width: 30px;
+  height: 4px;
+  background-color: black;
+}
+
+.navBar-lines::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: black;
+}
+
+.navBar-lines::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  display: block;
+  width: 30px;
+  height: 4px;
+  background-color: black;
+} */
+
+/* HAMBURGER MENU */
+/* checkbox */
+.bar {
+  position: absolute;
+  top: auto;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+}
+
+/* bars */
+.hamburger-menu {
+  --color-bar: hsl(0, 0%, 95%);
+  --metric-bar-height: 0.15em;
+  --metric-bar-width: 2em;
+  position: relative;
+  z-index: 10;
+  top: -45px;
+  left: 10px;
+}
+
+.hamburger-menu .bar__element {
+  margin: 0.5em 0;
+  width: var(--metric-bar-width);
+  height: var(--metric-bar-height);
+  background-color: var(--color-bar);
+  transition: all 0.4s ease;
+  border-radius: var(--metric-bar-height);
+  /* box-shadow: 1px 0px 10px hsla(0, 0%, 20%, 0.2); */
+}
+
+.hamburger-menu input[type="checkbox"]:hover + label .bar__element {
+  filter: brightness(1.05);
+}
+
+.hamburger-menu input[type="checkbox"]:checked + label .one {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger-menu input[type="checkbox"]:checked + label .three {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+.hamburger-menu input[type="checkbox"]:checked + label .two {
+  transform: scale(0);
+  transition: all 150ms ease;
+}
+
+.hamburger-menu-label {
+  cursor: pointer;
+}
+/* HAMBURGER MENU END */
+
+.navBar a {
   display: block;
   padding: 10px 40px;
   text-decoration: none;
-  color: #3fffd2;
-
+  color: #fff;
   font-weight: bold;
 }
 
