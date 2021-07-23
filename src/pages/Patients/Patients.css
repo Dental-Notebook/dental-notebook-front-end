@@ -1,0 +1,48 @@
+.patients-wrapper {
+  /* position: absolute;
+  width: 357px;
+  height: 40px;
+  left: 26px;
+  top: 257px;
+
+  background: #ffffff;
+  border-radius: 10px; */
+}
+.patients-title {
+}
+
+.patients-button-wrapper {
+  height: 28px;
+  width: 100%;
+
+  margin-bottom: 20px;
+}
+.patients-button {
+  width: 90%;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.patients-info {
+  width: 100%;
+  display: flex;
+  font-size: 16px;
+  align-items: center;
+  font-family: Roboto;
+  justify-content: space-between;
+}
+.patients-info-name {
+  font-weight: 500;
+}
+
+.patients-info-number {
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+.patients-info-arrow {
+  display: flex;
+  align-items: center;
+}
+.patients-add-new-patient {
+}

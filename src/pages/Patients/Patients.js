@@ -1,30 +1,44 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { PatientsContext } from "../../contexts/PatientsContext";
+import "./Patients.css";
+import CaretRightBlue from "../../assets/CaretRightBlue.svg";
 
 const Patients = (props) => {
   const { patients } = useContext(PatientsContext);
 
   return (
-    <div>
-      <h1>Patients</h1>
+    <div className="patients-wrapper">
+      <h1 className="patients-title">Patients</h1>
       {patients.map((patient) => (
-        <div key={patient.patient_id}>
+        <div key={patient.patient_id} className="patients-button-wrapper">
           <button
             onClick={() =>
               props.history.push(`/patients/${patient.patient_id}`)
             }
+            className="patients-button"
           >
-            <p>
-              <span>
+            <div className="patients-info">
+              <p className="patients-info-name">
                 {patient.firstname} {patient.lastname}
-              </span>{" "}
-              {patient.phone}
-            </p>
+              </p>
+              <p className="patients-info-number">
+                {patient.phone}{" "}
+                <span>
+                  <img
+                    src={CaretRightBlue}
+                    alt="blue arrow"
+                    className="patients-info-arrow"
+                  />
+                </span>
+              </p>
+            </div>
           </button>
         </div>
       ))}
-      <Link to="/add-new-patient">+++</Link>
+      <Link to="/add-new-patient" className="patients-add-new-patient">
+        +++
+      </Link>
     </div>
   );
 };
