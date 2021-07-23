@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
+import "../Homepage/Homepage.css";
 import axios from "axios";
 import moment from "moment";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import EditAppointment from "../../components/EditAppointment/EditAppointment";
 import Footer from "../../components/Footer/Footer";
 import AddAppointment from "../../components/AddAppointment/AddAppointment";
+import calendar_icon from "../../assets/calendar-light.svg";
 
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
@@ -83,9 +85,16 @@ const Homepage = () => {
 
   return (
     <div>
-      <h1>{currentDate}</h1>
-      <div>
-        <h1>Appointments</h1>
+      <div className="title-container">
+        <img
+          src={calendar_icon}
+          alt="calendar_icon"
+          className="calendar-icon"
+        />
+        <h1 className="current-date-text">{currentDate}</h1>
+      </div>
+      <div className="appointments-container">
+        <h1 className="appointments-title">Appointments</h1>
         {isAddNewAppointmentShown ? (
           <AddAppointment
             setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
@@ -100,8 +109,12 @@ const Homepage = () => {
               ) === moment.utc(moment()).format("dddd Do MMMM YYYY")
           )
           .map((appointment) => (
-            <div key={appointment.appointments_id}>
+            <div
+              key={appointment.appointments_id}
+              className="each-appointments-container"
+            >
               <button
+                className="appointment-button"
                 onClick={() =>
                   handleAppointmentIdOnClick(appointment.appointments_id)
                 }
@@ -121,14 +134,16 @@ const Homepage = () => {
             </div>
           ))}
       </div>
+      <div className="todos-container">
+        <h1>To do</h1>
+        {todos.map((todo) => (
+          <div key={todo.id}>
+            <p>{todo.todo_item}</p>
+            <button onClick={() => handleDelete(todo.id)}>Delete</button>
+          </div>
+        ))}
+      </div>
 
-      <h1>To do</h1>
-      {todos.map((todo) => (
-        <div key={todo.id}>
-          <p>{todo.todo_item}</p>
-          <button onClick={() => handleDelete(todo.id)}>Delete</button>
-        </div>
-      ))}
       <div>
         {isAddNewTodoShown ? (
           <form onSubmit={handleSubmitNewAddTodo}>

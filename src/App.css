@@ -21,6 +21,10 @@ input {
   text-align: center;
 }
 
+.Navbar {
+  margin-bottom: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

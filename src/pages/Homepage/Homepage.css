@@ -1,0 +1,46 @@
+/* CURRENT DATE */
+.title-container {
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  margin: 10vh 0 0 3vh;
+}
+
+.calendar-icon {
+  height: 3.5em;
+}
+
+.current-date-text {
+  font-size: 1.2rem;
+}
+
+/* APPOINTMENTS CONTAINER*/
+.appointments-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3vh;
+  margin-right: 3vh;
+  margin-top: 20px;
+}
+
+.appointments-title {
+  font-size: 1.4rem;
+}
+
+.appointment-text {
+  width: 100%;
+}
+
+.appointment-button {
+  width: 100%;
+  display: flex;
+  font-size: 1rem;
+  padding: 2px;
+}
+
+/* TODOS CONTAINER */
+.todos-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
