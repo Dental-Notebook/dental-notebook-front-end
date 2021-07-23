@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import EditTreatment from "../../components/EditTreatment/EditTreatment";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 
@@ -11,7 +10,6 @@ const TreatmentsList = () => {
     treatments,
     setTreatments,
     newTreatment,
-    setNewTreatment,
     isAddNewTreatmentShown,
     setIsAddNewTreatmentShown,
   } = useContext(TreatmentsContext);

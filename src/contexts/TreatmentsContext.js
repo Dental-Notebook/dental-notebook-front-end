@@ -24,16 +24,22 @@ const TreatmentsProvider = (props) => {
 
   /* ==============DELETE TREATMENT=============== */
   const handleDelete = (treatmentId) => {
-    axios
-      .delete(`/treatments/${treatmentId}`)
-      .then((response) => {
-        console.log(response.data);
-        const filteredTreatments = treatments.filter(
-          (treatment) => treatment.id !== treatmentId
-        );
-        setTreatments(filteredTreatments);
-      })
-      .catch((error) => alert(error));
+    const deleteConfirmation = window.confirm(
+      "Are you sure you want to delete this treatment?"
+    );
+
+    if (deleteConfirmation) {
+      axios
+        .delete(`/treatments/${treatmentId}`)
+        .then((response) => {
+          console.log(response.data);
+          const filteredTreatments = treatments.filter(
+            (treatment) => treatment.id !== treatmentId
+          );
+          setTreatments(filteredTreatments);
+        })
+        .catch((error) => alert(error));
+    }
   };
 
   /* ==============ADD TREATMENT=============== */
@@ -49,6 +55,10 @@ const TreatmentsProvider = (props) => {
       .then((response) => {
         setTreatments([...treatments, response.data]);
         setIsAddNewTreatmentShown(false);
+        setNewTreatment({
+          name: "",
+          price: "",
+        });
       })
       .catch((error) => alert(error));
   };
