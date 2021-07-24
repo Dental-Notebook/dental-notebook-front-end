@@ -21,9 +21,15 @@
 
 .footer-icon {
   transition: transform 250ms ease-in;
+  width: auto;
+  height: 50px;
 }
 
-.footer-icon:hover,
-.footer-icon:focus {
+.footer-icon:hover {
   transform: translateY(-5px);
+}
+
+@media screen and (min-width: 1024px) {
+  .footer-icon {
+  }
 }
