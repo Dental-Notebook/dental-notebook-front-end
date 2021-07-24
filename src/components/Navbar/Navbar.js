@@ -27,9 +27,6 @@ const Navbar = () => {
   return (
     <div>
       <div className="logo-container">
-        <img src={logo_dental_notebook} alt="Logo" />
-      </div>
-      <nav className="navBar">
         <div className="hamburger-menu">
           <input
             className="bar"
@@ -45,6 +42,11 @@ const Navbar = () => {
           </label>
         </div>
 
+        <Link to="/" className="navbar-link-logo">
+          <img src={logo_dental_notebook} alt="Logo" />
+        </Link>
+      </div>
+      <nav className="navBar">
         {/* <button onClick={handleToggle}>
         {navbarOpen ? "Menu" : <span className="navBar-lines"></span>}
       </button> */}

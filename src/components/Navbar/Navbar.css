@@ -1,17 +1,30 @@
 .logo-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100vw;
   background-color: #25a4cc;
   padding: 25px 0 15px;
+  position: relative;
+  max-height: 125px;
+  min-height: 80px;
 }
 
 .logo-container img {
-  width: 70%;
+  width: 100%;
+  max-width: 600px;
 }
 
 .navBar {
   position: relative;
+}
+
+.navbar-link-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 125px;
+  width: 70%;
 }
 
 .navBar button {
@@ -28,7 +41,7 @@
   overflow-y: scroll;
   list-style: none;
   position: fixed;
-  top: 78px;
+  top: 0;
   background: #25a4cc;
   left: 0;
   bottom: 0;
@@ -45,34 +58,6 @@
   /* width: 100%; */
   transform: translateX(0px);
 }
-
-/* .navBar-lines {
-  display: block;
-  position: relative;
-  width: 30px;
-  height: 4px;
-  background-color: black;
-}
-
-.navBar-lines::before {
-  content: "";
-  position: absolute;
-  top: -8px;
-  display: block;
-  width: 30px;
-  height: 4px;
-  background-color: black;
-}
-
-.navBar-lines::after {
-  content: "";
-  position: absolute;
-  top: 8px;
-  display: block;
-  width: 30px;
-  height: 4px;
-  background-color: black;
-} */
 
 /* HAMBURGER MENU */
 /* checkbox */
@@ -91,11 +76,12 @@
   --color-bar: hsl(0, 0%, 95%);
   --metric-bar-height: 0.15em;
   --metric-bar-width: 2em;
-  position: relative;
+  position: absolute;
   z-index: 10;
-  top: -45px;
+  /* top: -45px; */
+  bottom: 15px;
   left: 10px;
-  width: calc(100vw - 10px);
+  width: 32px;
 }
 
 .hamburger-menu .bar__element {
@@ -151,5 +137,5 @@
 }
 
 .menuNav li:first-child {
-  margin-top: 2rem;
+  margin-top: 8rem;
 }
