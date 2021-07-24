@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
+import "./Footer.css";
+import AddAppointmentBlue from "../../assets/AddAppointmentBlue.svg";
+import AppointmentsBlue from "../../assets/AppointmentsBlue.svg";
+import PatientsBlue from "../../assets/PatientsBlue.svg";
 
 const Footer = ({ setIsAddNewAppointmentShown }) => {
   return (
-    <div>
+    <div className="footer-container">
       <button onClick={() => setIsAddNewAppointmentShown(true)}>
-        Add appointment
+        <img src={AddAppointmentBlue} alt="Add appointment" />
       </button>
-      <Link to="/appointments">Appointments</Link>
-      <Link to="/patients">Patients</Link>
+      <Link to="/appointments">
+        <img src={AppointmentsBlue} alt="Appointments" />
+      </Link>
+      <Link to="/patients">
+        <img src={PatientsBlue} alt="Patients" />
+      </Link>
     </div>
   );
 };
