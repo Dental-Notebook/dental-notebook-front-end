@@ -8,13 +8,21 @@ const Footer = ({ setIsAddNewAppointmentShown }) => {
   return (
     <div className="footer-container">
       <button onClick={() => setIsAddNewAppointmentShown(true)}>
-        <img src={AddAppointmentBlue} alt="Add appointment" />
+        <img
+          className="footer-icon"
+          src={AddAppointmentBlue}
+          alt="Add appointment"
+        />
       </button>
       <Link to="/appointments">
-        <img src={AppointmentsBlue} alt="Appointments" />
+        <img
+          className="footer-icon"
+          src={AppointmentsBlue}
+          alt="Appointments"
+        />
       </Link>
       <Link to="/patients">
-        <img src={PatientsBlue} alt="Patients" />
+        <img className="footer-icon" src={PatientsBlue} alt="Patients" />
       </Link>
     </div>
   );
