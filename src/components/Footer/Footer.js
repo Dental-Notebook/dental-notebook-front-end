@@ -6,12 +6,8 @@ const Footer = ({ setIsAddNewAppointmentShown }) => {
       <button onClick={() => setIsAddNewAppointmentShown(true)}>
         Add appointment
       </button>
-      <button>
-        <Link to="/appointments">Appointments</Link>
-      </button>
-      <button>
-        <Link to="/patients">Patients</Link>
-      </button>
+      <Link to="/appointments">Appointments</Link>
+      <Link to="/patients">Patients</Link>
     </div>
   );
 };
