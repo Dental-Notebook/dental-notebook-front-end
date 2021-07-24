@@ -24,6 +24,7 @@
   transition: transform 250ms ease-in;
 }
 
-.footer-icon:hover {
+.footer-icon:hover,
+.footer-icon:focus {
   transform: translateY(-5px);
 }
