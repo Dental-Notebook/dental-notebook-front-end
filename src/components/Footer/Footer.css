@@ -20,8 +20,9 @@
 }
 
 .footer-icon {
-  transform: translateY(0);
   transition: transform 250ms ease-in;
+  width: auto;
+  height: 50px;
 }
 
 .footer-icon:hover {
