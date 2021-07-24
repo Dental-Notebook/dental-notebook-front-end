@@ -3,18 +3,27 @@ import { Link } from "react-router-dom";
 // import { MdClose } from "react-icons/md";
 // import { FiMenu } from "react-icons/fi";
 import logo_dental_notebook from "../../assets/logo_dental_notebook.svg";
+import navbar_home from "../../assets/navbar_home.svg";
+import navbar_patients from "../../assets/navbar_patients.svg";
+import navbar_appointments from "../../assets/navbar_appointments.svg";
+import navbar_price_list from "../../assets/navbar_price_list.svg";
+import navbar_earnings from "../../assets/navbar_earnings.svg";
 import "./Navbar.css";
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
+    setIsChecked(!isChecked);
   };
 
   const closeMenu = () => {
     setNavbarOpen(false);
+    setIsChecked(false);
   };
+
   return (
     <div>
       <div className="logo-container">
@@ -27,6 +36,7 @@ const Navbar = () => {
             onClick={handleToggle}
             type="checkbox"
             id="b"
+            checked={isChecked}
           />
           <label className="hamburger-menu-label" for="b">
             <div class="bar__element one"></div>
@@ -48,6 +58,9 @@ const Navbar = () => {
         <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
           <li>
             <Link to="/" className="active-link" onClick={() => closeMenu()}>
+              <span className="navbar-icons">
+                <img src={navbar_home} alt="home icon" />
+              </span>
               Home
             </Link>
           </li>
@@ -57,6 +70,9 @@ const Navbar = () => {
               className="active-link"
               onClick={() => closeMenu()}
             >
+              <span className="navbar-icons">
+                <img src={navbar_patients} alt="patients icon" />
+              </span>
               Patients
             </Link>
           </li>
@@ -66,6 +82,9 @@ const Navbar = () => {
               className="active-link"
               onClick={() => closeMenu()}
             >
+              <span className="navbar-icons">
+                <img src={navbar_appointments} alt="appointments icon" />
+              </span>
               Appointments
             </Link>
           </li>
@@ -75,6 +94,9 @@ const Navbar = () => {
               className="active-link"
               onClick={() => closeMenu()}
             >
+              <span className="navbar-icons">
+                <img src={navbar_price_list} alt="price list icon" />
+              </span>
               Price List
             </Link>
           </li>
@@ -84,6 +106,9 @@ const Navbar = () => {
               className="active-link"
               onClick={() => closeMenu()}
             >
+              <span className="navbar-icons">
+                <img src={navbar_earnings} alt="earnings icon" />
+              </span>
               Earnings
             </Link>
           </li>
