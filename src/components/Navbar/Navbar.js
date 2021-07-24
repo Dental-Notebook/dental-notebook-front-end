@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 // import { MdClose } from "react-icons/md";
 // import { FiMenu } from "react-icons/fi";
@@ -14,6 +14,31 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
 
+  const sidebar = useRef();
+  const hamburger = useRef();
+
+  const handleClick = (e) => {
+    if (
+      sidebar.current.contains(e.target) ||
+      hamburger.current.contains(e.target)
+    ) {
+      // inside click
+      return;
+    }
+    // outside click
+    setIsChecked(false);
+    setNavbarOpen(false);
+  };
+
+  useEffect(() => {
+    // add when mounted
+    document.addEventListener("mousedown", handleClick);
+    // return function to be called when unmounted
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+    };
+  }, []);
+
   const handleToggle = () => {
     setNavbarOpen(!navbarOpen);
     setIsChecked(!isChecked);
@@ -27,7 +52,7 @@ const Navbar = () => {
   return (
     <div>
       <div className="logo-container">
-        <div className="hamburger-menu">
+        <div className="hamburger-menu" ref={hamburger}>
           <input
             className="bar"
             onClick={handleToggle}
@@ -57,7 +82,10 @@ const Navbar = () => {
           <FiMenu style={{ color: "#7b7b7b", width: "40px", height: "40px" }} />
         )}
       </button> */}
-        <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+        <ul
+          className={`menuNav ${navbarOpen ? " showMenu" : ""}`}
+          ref={sidebar}
+        >
           <li>
             <Link to="/" className="active-link" onClick={() => closeMenu()}>
               <span className="navbar-icons">
