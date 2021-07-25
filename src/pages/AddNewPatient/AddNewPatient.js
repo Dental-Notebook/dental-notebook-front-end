@@ -4,6 +4,9 @@ import moment from "moment";
 import { PatientsContext } from "../../contexts/PatientsContext";
 import teethmap from "../../assets/teethmap.png";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
+import "./AddNewPatient.css";
+import AddNewPatientIcon from "../../assets/AddNewPatientIcon.svg";
+import CheckCircleGreen from "../../assets/CheckCircleGreen.svg";
 
 const AddNewPatient = (props) => {
   const { patients, setPatients } = useContext(PatientsContext);
@@ -103,11 +106,20 @@ const AddNewPatient = (props) => {
   };
 
   return (
-    <div>
-      <div>
-        {/*------------- New patient --------------*/}
-        <form onSubmit={handleSubmitNewPatient}>
-          <h3>Personal information</h3>
+    <div className="patient-container">
+      {/*------------- New patient --------------*/}
+      <h1 className="patient-title">
+        <span>
+          <img src={AddNewPatientIcon} alt="add new patient" />
+        </span>
+        Add New Patient
+      </h1>
+      <form
+        className="patient-personalInfo-form"
+        onSubmit={handleSubmitNewPatient}
+      >
+        <h3>Personal information</h3>
+        <div className="patient-form-personalInfo-container">
           <input
             name="firstname"
             value={newPatient.firstname}
@@ -134,6 +146,7 @@ const AddNewPatient = (props) => {
             value={newPatient.email}
             placeholder="E-mail"
             onChange={handleChangeNewPatient}
+            type="email"
             required
           />
           <input
@@ -143,55 +156,69 @@ const AddNewPatient = (props) => {
             onChange={handleChangeNewPatient}
             required
           />
-          <label htmlFor="birth_date">Date of Birth</label>
-          <input
-            name="birth_date"
-            value={newPatient.birth_date}
-            placeholder="Birth Date"
-            type="date"
-            onChange={handleChangeNewPatient}
-            required
-            id="birth_date"
-          />
+          <div className="patient-form-personalInfo-birthDate">
+            <label htmlFor="birth_date">Date of Birth</label>
+            <input
+              name="birth_date"
+              value={newPatient.birth_date}
+              placeholder="Birth Date"
+              type="date"
+              onChange={handleChangeNewPatient}
+              required
+              id="birth_date"
+            />
+          </div>
           <select name="gender" onChange={handleChangeNewPatient} required>
             <option value="">Gender</option>
             <option value="Female">Female</option>
             <option value="Male">Male</option>
             <option value="Other">Other</option>
           </select>
-          <h3>Medical background</h3>
-          <label htmlFor="hbp">High Blood Pressure</label>
-          <input
-            name="has_hbd"
-            type="checkbox"
-            onChange={handleCheckBox}
-            checked={newPatient.has_hbd}
-            id="hbp"
-          />
-          <label htmlFor="diabetes">Diabetes</label>
-          <input
-            name="has_diabetes"
-            type="checkbox"
-            onChange={handleCheckBox}
-            checked={newPatient.has_diabetes}
-            id="diabetes"
-          />
-          <label htmlFor="active_medication">Active Medication</label>
-          <input
-            name="has_active_medication"
-            type="checkbox"
-            onChange={handleCheckBox}
-            checked={newPatient.has_active_medication}
-            id="active_medication"
-          />
-          <label htmlFor="allergies">Allergies</label>
-          <input
-            name="has_alergies"
-            type="checkbox"
-            onChange={handleCheckBox}
-            checked={newPatient.has_alergies}
-            id="allergies"
-          />
+        </div>
+        <h3>Medical background</h3>
+        <div className="patient-form-medicalBackground-checkboxes">
+          <div>
+            <label htmlFor="hbp">High Blood Pressure</label>
+            <input
+              name="has_hbd"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={newPatient.has_hbd}
+              id="hbp"
+            />
+          </div>
+          <div>
+            <label htmlFor="diabetes">Diabetes</label>
+            <input
+              name="has_diabetes"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={newPatient.has_diabetes}
+              id="diabetes"
+            />
+          </div>
+          <div>
+            <label htmlFor="active_medication">Active Medication</label>
+            <input
+              name="has_active_medication"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={newPatient.has_active_medication}
+              id="active_medication"
+            />
+          </div>
+          <div>
+            <label htmlFor="allergies">Allergies</label>
+            <input
+              name="has_alergies"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={newPatient.has_alergies}
+              id="allergies"
+            />
+          </div>
+        </div>
+        <div className="patient-form-medicalBackground-textInputs">
           <input
             name="alergies"
             value={newPatient.alergies}
@@ -204,25 +231,35 @@ const AddNewPatient = (props) => {
             placeholder="Active Medication"
             onChange={handleChangeNewPatient}
           />
-          <button type="submit">submit</button>
-        </form>
-        {/*------------- Teeth Map --------------*/}
-        <div>
-          <h3>Teeth Map</h3>
-          <img src={teethmap} alt="teeth map" />
-          {newPatientTreatments.map((treatment) => (
-            <div>
-              <p>{treatment.tooth}</p>
-              <p>{treatment.dental_status}</p>
-              {treatments.map((item) =>
-                Number(treatment.treatments_id) === item.id ? (
-                  <p>{item.name}</p>
-                ) : null
-              )}
-            </div>
-          ))}
+        </div>
 
-          <form onSubmit={handleSubmitNewPatientTeethMap}>
+        <button className="submitButton" type="submit">
+          <img src={CheckCircleGreen} alt="submit button" />
+        </button>
+      </form>
+      {/*------------- Teeth Map --------------*/}
+      <div className="teeth-map">
+        <h3>Teeth Map</h3>
+        <div className="teeth-map-img-container">
+          <img className="teeth-map-img" src={teethmap} alt="teeth map" />
+        </div>
+        {newPatientTreatments.map((treatment) => (
+          <div key={treatment.treatments_id} className="teeth-map-treatment">
+            <p>{treatment.tooth}</p>
+            <p>{treatment.dental_status}</p>
+            {treatments.map((item) =>
+              Number(treatment.treatments_id) === item.id ? (
+                <p>{item.name}</p>
+              ) : null
+            )}
+          </div>
+        ))}
+
+        <form
+          className="teeth-map-form"
+          onSubmit={handleSubmitNewPatientTeethMap}
+        >
+          <div className="teeth-map-form-container">
             <select
               name="tooth"
               value={newPatientTreatmentsForm.tooth}
@@ -253,9 +290,9 @@ const AddNewPatient = (props) => {
                 </option>
               ))}
             </select>
-            <button type="submit">+ New Line</button>
-          </form>
-        </div>
+          </div>
+          <button type="submit">+ New Line</button>
+        </form>
       </div>
     </div>
   );
