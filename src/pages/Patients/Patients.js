@@ -3,13 +3,23 @@ import { Link } from "react-router-dom";
 import { PatientsContext } from "../../contexts/PatientsContext";
 import "./Patients.css";
 import CaretRightBlue from "../../assets/CaretRightBlue.svg";
+import PlusCircleBlue from "../../assets/PlusCircleBlue.svg";
+import usersLight from "../../assets/usersLight.svg";
 
 const Patients = (props) => {
   const { patients } = useContext(PatientsContext);
 
   return (
     <div className="patients-wrapper">
-      <h1 className="patients-title">Patients</h1>
+      <div className="patients-title">
+        <img
+          src={usersLight}
+          alt="patients-list-image"
+          className="patients-title-logo"
+        />
+        <h1 className="patients-title-txt">Patients</h1>
+      </div>
+
       {patients.map((patient) => (
         <div key={patient.patient_id} className="patients-button-wrapper">
           <button
@@ -37,7 +47,11 @@ const Patients = (props) => {
         </div>
       ))}
       <Link to="/add-new-patient" className="patients-add-new-patient">
-        +++
+        <img
+          src={PlusCircleBlue}
+          alt="add patient button"
+          className="add-patient-button"
+        />
       </Link>
     </div>
   );
