@@ -3,17 +3,9 @@ import moment from "moment";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import axios from "axios";
+import XCircleRed from "../../assets/XCircleRed.svg";
 
 const EditAppointment = (props) => {
-  /* appointment_id,
-  patient_id,
-  firstname,
-  lastname,
-  phone,
-  appointment_date,
-  setIsEditModeActive,
-  handleDeleteTreatmentFromAppointment, */
-
   const [editedAppointment, setEditedAppointment] = useState({
     patient_id: props.patient_id,
     appointment_id: props.appointments_id,
@@ -99,58 +91,67 @@ const EditAppointment = (props) => {
   };
 
   return (
-    <div>
+    <div className="eddit-appointment-popup">
       {/* ==============EDIT APPOINTMENT=============== */}
+      <form
+        onSubmit={handleSubmitEditTreatment}
+        className="eddit-appointment-form"
+      >
+        <p className="eddit-appointment-name">
+          {editedAppointment.firstname} {editedAppointment.lastname}
+        </p>
+        <p className="eddit-appointment-name"> {editedAppointment.phone}</p>
 
-      <div>
-        <form onSubmit={handleSubmitEditTreatment}>
-          <p>
-            {editedAppointment.firstname} {editedAppointment.lastname}
-          </p>
-          <p>{editedAppointment.phone}</p>
-
-          <label>
-            Treatment:
-            <select onChange={handleEditTreatmentToAppointment}>
-              <option value="">Select treatment</option>
-              {treatments.map((treatment) => (
-                <option key={treatment.id} value={treatment.id}>
-                  {treatment.name}
-                </option>
-              ))}
-            </select>
-            <div>
-              {editedAppointment.treatments.map((treatment) => (
-                <React.Fragment key={treatment.id}>
-                  <p>{treatment.name}</p>
-                  <button
-                    style={{ backgroundColor: "coral" }}
-                    onClick={() =>
-                      handleDeleteTreatmentFromAppointment(
-                        treatment.treatments_id
-                      )
-                    }
-                  >
-                    x
-                  </button>
-                </React.Fragment>
-              ))}
-            </div>
-          </label>
-          <input
-            onChange={handleEditAppointmentDate}
-            value={editedAppointment.appointment_date}
-            name="appointment_date"
-            type="datetime-local"
-            required
-          />
-
-          <button type="submit">SAVE</button>
-          <button onClick={() => props.setIsEditModeActive(false)}>
-            CANCEL
-          </button>
-        </form>
-      </div>
+        <label>
+          Treatment:
+          <select onChange={handleEditTreatmentToAppointment}>
+            <option value="">Select treatment</option>
+            {treatments.map((treatment) => (
+              <option key={treatment.id} value={treatment.id}>
+                {treatment.name}
+              </option>
+            ))}
+          </select>
+          <div>
+            {editedAppointment.treatments.map((treatment) => (
+              <React.Fragment key={treatment.id}>
+                <p>{treatment.name}</p>
+                <button
+                  style={{ backgroundColor: "coral" }}
+                  onClick={() =>
+                    handleDeleteTreatmentFromAppointment(
+                      treatment.treatments_id
+                    )
+                  }
+                >
+                  x
+                </button>
+              </React.Fragment>
+            ))}
+          </div>
+        </label>
+        <input
+          onChange={handleEditAppointmentDate}
+          value={editedAppointment.appointment_date}
+          name="appointment_date"
+          type="datetime-local"
+          required
+        />
+        <button onClick={() => props.setIsEditModeActive(false)}>CANCEL</button>
+        <button type="submit">SAVE</button>
+      </form>
+      <button
+        onClick={() =>
+          props.handleDeleteAppointment(editedAppointment.appointment_id)
+        }
+        className="appointments-delete-button"
+      >
+        <img
+          src={XCircleRed}
+          alt="delte button"
+          className="appointments-delete-button-img"
+        />
+      </button>
     </div>
   );
 };
