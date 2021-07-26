@@ -50,7 +50,7 @@ const Earnings = () => {
   }
 
   return (
-    <div>
+    <div className="max_container">
       <div className="earnings_container">
         <img src={Coin_light} className="coin_light" />
         <h1 className="earnings">Earnings</h1>
@@ -76,9 +76,12 @@ const Earnings = () => {
                     <h1 className="date-h1">
                       {moment(earn.appointment_date).format("MMM Do YYYY")}
                     </h1>
-                    <p className="treatment-p">
-                      {earn.name} {earn.treatments_earnings}$
-                    </p>
+                    <div className="treatment-p">
+                      <p className="treatments_name">{earn.name}</p>
+                      <p className="treatments_price">
+                        {earn.treatments_earnings}$
+                      </p>
+                    </div>
                   </div>
                 );
               } else if (
@@ -92,17 +95,23 @@ const Earnings = () => {
                     <h1 className="date-h1">
                       {moment(earn.appointment_date).format("MMM Do YYYY")}
                     </h1>
-                    <p className="treatment-p">
-                      {earn.name} {earn.treatments_earnings}$
-                    </p>
+                    <div className="treatment-p">
+                      <p className="treatments_name">{earn.name}</p>
+                      <p className="treatments_price">
+                        {earn.treatments_earnings}$
+                      </p>
+                    </div>
                   </div>
                 );
               } else {
                 return (
                   <div key={index}>
-                    <p className="treatment-p">
-                      {earn.name} {earn.treatments_earnings}$
-                    </p>
+                    <div className="treatment-p">
+                      <p className="treatments_name">{earn.name}</p>
+                      <p className="treatments_price">
+                        {earn.treatments_earnings}$
+                      </p>
+                    </div>
                   </div>
                 );
               }
