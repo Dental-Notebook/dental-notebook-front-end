@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import axios from "axios";
 import moment from "moment";
+import Modal from "../../components/Modal/Modal";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
@@ -27,12 +28,14 @@ const Appointments = () => {
     );
 
     if (deleteConfirmation) {
+      //setIsEditModeActive(false);
       axios
         .delete(`/appointments/${appointmentId}`)
         .then((response) => {
           const filteredAppointments = appointments.filter(
             (appointment) => appointment.appointments_id !== appointmentId
           );
+
           setAppointments(filteredAppointments);
         })
         .catch((error) => alert(error));
@@ -94,26 +97,16 @@ const Appointments = () => {
                 />
               </div>
             </button>
-            {/* <button
-              onClick={() =>
-                handleDeleteAppointment(appointment.appointments_id)
-              }
-              className="appointments-delete-button"
-            >
-              <img
-                src={XCircleRed}
-                alt="delte button"
-                className="appointments-delete-button-img"
-              />
-            </button> */}
 
             {isEditModeActive &&
             appointment.appointments_id === appointmentId ? (
-              <EditAppointment
-                {...appointment}
-                handleDeleteAppointment={handleDeleteAppointment}
-                setIsEditModeActive={setIsEditModeActive}
-              />
+              <Modal>
+                <EditAppointment
+                  {...appointment}
+                  handleDeleteAppointment={handleDeleteAppointment}
+                  setIsEditModeActive={setIsEditModeActive}
+                />
+              </Modal>
             ) : null}
           </div>
         ))}
