@@ -1,46 +1,161 @@
-/* CURRENT DATE */
-.title-container {
-  justify-content: flex-start;
-  display: flex;
-  align-items: center;
-  margin: 10vh 0 0 3vh;
+.homepage-container {
+  max-width: 600px;
+  margin: auto;
+  width: 90%;
 }
 
-.calendar-icon {
-  height: 3.5em;
+/* CURRENT DATE */
+.title-container {
+  display: flex;
+  align-items: center;
+  margin-top: 3em;
+  margin-bottom: 2em;
+  align-self: flex-end;
+  line-height: 27px;
 }
 
 .current-date-text {
-  font-size: 1.2rem;
+  font-size: 22px;
+  font-weight: 300;
 }
 
-/* APPOINTMENTS CONTAINER*/
-.appointments-container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 3vh;
-  margin-right: 3vh;
-  margin-top: 20px;
+.calendar-icon {
+  width: 33px;
+  margin-right: 3px;
 }
 
 .appointments-title {
-  font-size: 1.4rem;
+  font-size: 22px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  text-align: left;
 }
 
-.appointment-text {
+/* APPOINTMENTS CONTAINER*/
+
+/* .appointments-container {
+  display: flex;
+  align-items: center;
+  margin-top: 3em;
+  margin-bottom: 4em;
+  justify-content: center;
+  align-self: flex-end;
+  line-height: 27px;
+} */
+
+.each-appointments-container {
+  height: 28px;
   width: 100%;
+  margin-bottom: 25px;
 }
 
 .appointment-button {
   width: 100%;
+  max-width: 600px;
+  height: 40px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 1px 2px 1px rgb(0 0 0 / 19%);
+}
+
+.appointments-info {
+  width: 100%;
   display: flex;
-  font-size: 1rem;
-  padding: 2px;
+  font-size: 16px;
+  align-items: center;
+  font-family: Roboto;
+  justify-content: space-between;
+}
+
+.appointment-date {
+  display: flex;
+  align-items: center;
+  font-weight: 300;
+}
+
+.appointment-patient-name {
+  font-weight: 600;
+}
+
+.patients-info-arrow {
+  display: flex;
+  align-items: center;
 }
 
 /* TODOS CONTAINER */
 .todos-container {
+  width: 100%;
+  align-items: center;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.todos-title {
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.todo-line {
+  display: block;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;
+  border-style: inset;
+  border-width: 1px;
+  width: 100%;
+}
+
+/* .todo-line {
+  width: 90%;
+  max-width: 600px;
+  margin-left: 0;
+} */
+
+.each-todo-container {
   display: flex;
-  flex-direction: column;
-  margin-top: 20px;
+  font-size: 16px;
+  align-items: center;
+  font-family: Roboto;
+  justify-content: space-between;
+  margin: 0px 10px 0px 10px;
+  font-weight: 300;
+}
+
+.delete-todo-button {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  height: 15px;
+}
+
+.todo-line {
+  display: block;
+  unicode-bidi: -webkit-isolate;
+  unicode-bidi: isolate;
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: auto;
+  margin-inline-end: auto;
+  overflow: hidden;
+  border: 1px solid lightgrey;
+  margin: 5px 0px 5px 0px;
+}
+
+.add-todo-button {
+  border-radius: 15px;
+  background-color: #3eadcf;
+  color: white;
+  border: 0;
+  padding: 6px;
+  font-weight: 300;
+}
+
+.add-todo-button-container {
+  text-align: end;
+  margin: 20px 0px 20px 0px;
 }
