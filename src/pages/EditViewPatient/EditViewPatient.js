@@ -360,16 +360,18 @@ const EditViewPatient = (props) => {
           <button type="submit">+ New Line</button>
         </form>
       </div>
-      <div>
+      <div className="patient-appointments-container">
         <h3>Appointments</h3>
         {appointments.length &&
           appointments
             .filter((item) => item.patient_id === Number(props.match.params.id))
             .map((element, index) => (
-              <div key={index}>
-                <p>{moment(element.appointment_date).format("HH:mm")}</p>
-                <p>{moment(element.appointment_date).format("DD/MM/YYYY")}</p>
-                <div>
+              <div className="patient-appointments" key={index}>
+                <div className="patient-appointments-time">
+                  <p>{moment(element.appointment_date).format("HH:mm")}</p>
+                  <p>{moment(element.appointment_date).format("DD/MM/YYYY")}</p>
+                </div>
+                <div className="patient-appointments-treatments">
                   <p>Appointment for</p>
                   <ul>
                     {element.treatments.map((item) => (
