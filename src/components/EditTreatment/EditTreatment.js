@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
+import Pencil from "../../assets/Pencil.svg";
 
 const EditTreatment = (props) => {
   const { name, price, treatments, id } = props;
@@ -59,8 +60,12 @@ const EditTreatment = (props) => {
           </form>
         </div>
       ) : (
-        <button onClick={() => setIsEditModeActive(true)}>
-          Edit treatment
+        <button className="edit-button" onClick={() => setIsEditModeActive(true)}>
+          <img
+          src={Pencil}
+          alt="edit treatment button"
+          className="button-edit-treatment"
+          />
         </button>
       )}
     </div>

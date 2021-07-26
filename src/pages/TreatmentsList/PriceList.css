@@ -1,0 +1,88 @@
+* {
+  font-family: roboto;
+}
+.title-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2.2em;
+    margin-top: 1.5em;
+    align-self: flex-end;
+    line-height: 27px;
+}
+
+.treatment-container {
+display: flex;
+justify-content: space-be
+
+}
+.money-pin {
+  width: 30px;
+  height: 30px;
+  margin-right: 7px;
+}
+.title {
+  font-size: 22px;
+  font-weight: 300px;
+  text-align: center;
+  
+}
+
+.price-container {
+  width: 80%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: auto;
+  
+}
+
+.treatment-name {
+  height: 10px;
+  font-size: 15px;
+  font-weight: 300px;
+  text-align: left;
+}
+
+.treatment-price {
+  font-size: 16px;
+}
+
+.delete-button {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+  
+ 
+}
+
+.delete-button2{
+    background: none;
+    border: none;
+    height: fit-content;
+
+}
+.add-patient-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 25px;
+  margin-right: 20px;
+}
+
+.button-edit-treatment {
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  border-radius: 50%;
+  display: block;
+  align-items: flex-end;
+
+}
+.edit-button{
+    background: none;
+    border: none;
+}
