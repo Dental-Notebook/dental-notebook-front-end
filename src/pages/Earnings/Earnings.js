@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
-import Coin_light from "../../assets/coin-light.svg";
+import TwoCoinsEarnings from "../../assets/TwoCoinsEarnings.svg";
 import "../Earnings/earnings.css";
 
 const Earnings = () => {
@@ -52,7 +52,7 @@ const Earnings = () => {
   return (
     <div className="max_container">
       <div className="earnings_container">
-        <img src={Coin_light} className="coin_light" />
+        <img src={TwoCoinsEarnings} className="coin_light" />
         <h1 className="earnings">Earnings</h1>
       </div>
       <div className="total_container">
