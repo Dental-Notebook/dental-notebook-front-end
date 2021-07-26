@@ -5,6 +5,10 @@ import { PatientsContext } from "../../contexts/PatientsContext";
 import teethmap from "../../assets/teethmap.png";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
+import "./EditViewPatient.css";
+import AddNewPatientIcon from "../../assets/AddNewPatientIcon.svg";
+import CheckCircleGreen from "../../assets/CheckCircleGreen.svg";
+import XCircleRed from "../../assets/XCircleRed.svg";
 
 const EditViewPatient = (props) => {
   const { patients, setPatients } = useContext(PatientsContext);
@@ -158,117 +162,147 @@ const EditViewPatient = (props) => {
   console.log(appointments);
 
   return (
-    <div>
-      <form onSubmit={handleSubmitViewEditPatient}>
+    <div className="patient-container">
+      <h1 className="patient-title">
+        <span>
+          <img src={AddNewPatientIcon} alt="edit patient" />
+        </span>
+        Edit Patient
+      </h1>
+      <form
+        className="patient-personalInfo-form"
+        onSubmit={handleSubmitViewEditPatient}
+      >
         <h3>Personal information</h3>
-        <input
-          name="firstname"
-          value={viewEditPatient.firstname}
-          placeholder="First name"
-          onChange={handleChangeViewEditPatient}
-          required
-        />
-        <input
-          name="lastname"
-          value={viewEditPatient.lastname}
-          placeholder="Last name"
-          onChange={handleChangeViewEditPatient}
-          required
-        />
-        <input
-          name="phone"
-          value={viewEditPatient.phone}
-          placeholder="Phone number"
-          onChange={handleChangeViewEditPatient}
-          required
-        />
-        <input
-          name="email"
-          value={viewEditPatient.email}
-          placeholder="E-mail"
-          onChange={handleChangeViewEditPatient}
-          required
-        />
-        <input
-          name="occupation"
-          value={viewEditPatient.occupation}
-          placeholder="Occupation"
-          onChange={handleChangeViewEditPatient}
-          required
-        />
-        <label htmlFor="birth_date">Date of Birth</label>
-        <input
-          name="birth_date"
-          value={moment(viewEditPatient.birth_date).format("YYYY-MM-DD")}
-          type="date"
-          onChange={handleChangeViewEditPatient}
-          required
-          id="birth_date"
-        />
-        <select
-          name="gender"
-          value={viewEditPatient.gender}
-          onChange={handleChangeViewEditPatient}
-          required
-        >
-          <option value="">Gender</option>
-          <option value="Female">Female</option>
-          <option value="Male">Male</option>
-          <option value="Other">Other</option>
-        </select>
+        <div className="patient-form-personalInfo-container">
+          <input
+            name="firstname"
+            value={viewEditPatient.firstname}
+            placeholder="First name"
+            onChange={handleChangeViewEditPatient}
+            required
+          />
+          <input
+            name="lastname"
+            value={viewEditPatient.lastname}
+            placeholder="Last name"
+            onChange={handleChangeViewEditPatient}
+            required
+          />
+          <input
+            name="phone"
+            value={viewEditPatient.phone}
+            placeholder="Phone number"
+            onChange={handleChangeViewEditPatient}
+            required
+          />
+          <input
+            name="email"
+            value={viewEditPatient.email}
+            placeholder="E-mail"
+            onChange={handleChangeViewEditPatient}
+            type="email"
+            required
+          />
+          <input
+            name="occupation"
+            value={viewEditPatient.occupation}
+            placeholder="Occupation"
+            onChange={handleChangeViewEditPatient}
+            required
+          />
+          <div className="patient-form-personalInfo-birthDate">
+            <label htmlFor="birth_date">Date of Birth</label>
+            <input
+              name="birth_date"
+              value={moment(viewEditPatient.birth_date).format("YYYY-MM-DD")}
+              type="date"
+              onChange={handleChangeViewEditPatient}
+              required
+              id="birth_date"
+            />
+          </div>
+          <select
+            name="gender"
+            value={viewEditPatient.gender}
+            onChange={handleChangeViewEditPatient}
+            required
+          >
+            <option value="">Gender</option>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         <h3>Medical background</h3>
-        <label htmlFor="hbp">High Blood Pressure</label>
-        <input
-          name="has_hbd"
-          type="checkbox"
-          onChange={handleCheckBox}
-          checked={viewEditPatient.has_hbd}
-          id="hbp"
-        />
-        <label htmlFor="diabetes">Diabetes</label>
-        <input
-          name="has_diabetes"
-          type="checkbox"
-          onChange={handleCheckBox}
-          checked={viewEditPatient.has_diabetes}
-          id="diabetes"
-        />
-        <label htmlFor="active_medication">Active Medication</label>
-        <input
-          name="has_active_medication"
-          type="checkbox"
-          onChange={handleCheckBox}
-          checked={viewEditPatient.has_active_medication}
-          id="active_medication"
-        />
-        <label htmlFor="allergies">Allergies</label>
-        <input
-          name="has_alergies"
-          type="checkbox"
-          onChange={handleCheckBox}
-          checked={viewEditPatient.has_alergies}
-          id="allergies"
-        />
-        <input
-          name="alergies"
-          value={viewEditPatient.alergies}
-          placeholder="Allergies"
-          onChange={handleChangeViewEditPatient}
-        />
-        <input
-          name="active_medication"
-          value={viewEditPatient.active_medication}
-          placeholder="Active Medication"
-          onChange={handleChangeViewEditPatient}
-        />
-        <button type="submit">Save Changes</button>
+        <div className="patient-form-medicalBackground-checkboxes">
+          <div>
+            <label htmlFor="hbp">High Blood Pressure</label>
+            <input
+              name="has_hbd"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={viewEditPatient.has_hbd}
+              id="hbp"
+            />
+          </div>
+          <div>
+            <label htmlFor="diabetes">Diabetes</label>
+            <input
+              name="has_diabetes"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={viewEditPatient.has_diabetes}
+              id="diabetes"
+            />
+          </div>
+          <div>
+            <label htmlFor="active_medication">Active Medication</label>
+            <input
+              name="has_active_medication"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={viewEditPatient.has_active_medication}
+              id="active_medication"
+            />
+          </div>
+          <div>
+            <label htmlFor="allergies">Allergies</label>
+            <input
+              name="has_alergies"
+              type="checkbox"
+              onChange={handleCheckBox}
+              checked={viewEditPatient.has_alergies}
+              id="allergies"
+            />
+          </div>
+        </div>
+        <div className="patient-form-medicalBackground-textInputs">
+          <input
+            name="alergies"
+            value={viewEditPatient.alergies}
+            placeholder="Allergies"
+            onChange={handleChangeViewEditPatient}
+          />
+          <input
+            name="active_medication"
+            value={viewEditPatient.active_medication}
+            placeholder="Active Medication"
+            onChange={handleChangeViewEditPatient}
+          />
+        </div>
+        <button className="submitButton" type="submit">
+          <img src={CheckCircleGreen} alt="submit button" />
+        </button>
       </form>
       {/*------------- Teeth Map --------------*/}
-      <div>
+      <div className="teeth-map">
         <h3>Teeth Map</h3>
-        <img src={teethmap} alt="teeth map" />
+        <div className="teeth-map-img-container">
+          <img className="teeth-map-img" src={teethmap} alt="teeth map" />
+        </div>
         {viewEditPatientTreatments.map((treatment) => (
-          <div key={treatment.treatments_id}>
+          <div key={treatment.treatments_id} className="teeth-map-treatment">
             <p>{treatment.tooth}</p>
             <p>{treatment.dental_status}</p>
             {treatments.map((item) =>
@@ -280,56 +314,64 @@ const EditViewPatient = (props) => {
               onClick={() =>
                 deleteTeethTreatmentHandler(treatment.teeth_treatment_id)
               }
+              className="teeth-map-deleteTreatment"
             >
-              X
+              <img src={XCircleRed} alt="delete treatment" />
             </button>
           </div>
         ))}
 
-        <form onSubmit={handleSubmitViewEditPatientTeethMap}>
-          <select
-            name="tooth"
-            value={viewEditPatientTreatmentsForm.tooth}
-            onChange={handleChangeViewEditPatientTeethMap}
-          >
-            <option value="">Tooth</option>
-            {teethTreatmentsArrDropdown.map((tooth) => (
-              <option key={tooth} value={tooth}>
-                {tooth}
-              </option>
-            ))}
-          </select>
-          <input
-            name="dental_status"
-            value={viewEditPatientTreatmentsForm.dental_status}
-            placeholder="Dental status"
-            onChange={handleChangeViewEditPatientTeethMap}
-          />
-          <select
-            value={viewEditPatientTreatmentsForm.treatments_id}
-            name="treatments_id"
-            onChange={handleChangeViewEditPatientTeethMap}
-          >
-            <option value="">Treatment</option>
-            {treatments.map((treatment) => (
-              <option key={treatment.id} value={treatment.id}>
-                {treatment.name}
-              </option>
-            ))}
-          </select>
+        <form
+          className="teeth-map-form"
+          onSubmit={handleSubmitViewEditPatientTeethMap}
+        >
+          <div className="teeth-map-form-container">
+            <select
+              name="tooth"
+              value={viewEditPatientTreatmentsForm.tooth}
+              onChange={handleChangeViewEditPatientTeethMap}
+            >
+              <option value="">Tooth</option>
+              {teethTreatmentsArrDropdown.map((tooth) => (
+                <option key={tooth} value={tooth}>
+                  {tooth}
+                </option>
+              ))}
+            </select>
+            <input
+              name="dental_status"
+              value={viewEditPatientTreatmentsForm.dental_status}
+              placeholder="Dental status"
+              onChange={handleChangeViewEditPatientTeethMap}
+            />
+            <select
+              value={viewEditPatientTreatmentsForm.treatments_id}
+              name="treatments_id"
+              onChange={handleChangeViewEditPatientTeethMap}
+            >
+              <option value="">Treatment</option>
+              {treatments.map((treatment) => (
+                <option key={treatment.id} value={treatment.id}>
+                  {treatment.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <button type="submit">+ New Line</button>
         </form>
       </div>
-      <div>
+      <div className="patient-appointments-container">
         <h3>Appointments</h3>
         {appointments.length &&
           appointments
             .filter((item) => item.patient_id === Number(props.match.params.id))
             .map((element, index) => (
-              <div key={index}>
-                <p>{moment(element.appointment_date).format("HH:mm")}</p>
-                <p>{moment(element.appointment_date).format("DD/MM/YYYY")}</p>
-                <div>
+              <div className="patient-appointments" key={index}>
+                <div className="patient-appointments-time">
+                  <p>{moment(element.appointment_date).format("HH:mm")}</p>
+                  <p>{moment(element.appointment_date).format("DD/MM/YYYY")}</p>
+                </div>
+                <div className="patient-appointments-treatments">
                   <p>Appointment for</p>
                   <ul>
                     {element.treatments.map((item) => (
