@@ -120,7 +120,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              to="price-list"
+              to="/price-list"
               className="active-link"
               onClick={() => closeMenu()}
             >

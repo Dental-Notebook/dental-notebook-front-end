@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .patient-container {
   width: 90%;
   margin: auto;
@@ -9,11 +13,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 1.5em;
+  font-weight: 300;
 }
 
 .patient-title span {
   margin-right: 5px;
+}
+
+.patient-personalInfo-form h3:first-child {
+  margin-top: 2.2em;
 }
 
 .patient-personalInfo-form h3,
@@ -23,6 +32,7 @@
   justify-content: center;
   margin-top: 25px;
   margin-bottom: 15px;
+  font-weight: 300;
 }
 
 /* PERSONAL INFORMATION */
@@ -60,6 +70,7 @@
   border: none;
   border-bottom: 1px solid #bbbdbd;
   font-size: 16px;
+  background-color: #fff;
 }
 
 .patient-form-personalInfo-container select {
@@ -154,8 +165,8 @@
 /* SUBMIT BUTTON */
 .submitButton {
   position: fixed !important;
-  top: calc(100vh - 90px);
-  left: calc(100vw - 100px);
+  bottom: 25px;
+  right: 20px;
   border: none;
   background-color: transparent;
   width: 70px;
@@ -194,7 +205,7 @@
 
 /* TEETH MAP FORM TO ADD TO TREATMENT LIST */
 .teeth-map-form-container {
-  margin: 10px 0 0 -10px;
+  margin: 30px 0 0 -10px;
   width: calc(100% + 10px);
 }
 
