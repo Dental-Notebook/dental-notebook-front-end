@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import moment from "moment";
+import Coin_light from "../../assets/coin-light.svg";
+import "../Earnings/earnings.css";
 
 const Earnings = () => {
   const [totalEarnings, setTotalEarnings] = useState(0);
@@ -49,47 +51,63 @@ const Earnings = () => {
 
   return (
     <div>
-      <h1>Total Earnings</h1>
-      <p>{totalEarnings}</p>
-      <h1>Month Earnings</h1>
-      <p>{lastMonthEarnings}</p>
-      <h1>Earnings By Date</h1>
-      <div>
-        {earningsByDate.length >= 1 &&
-          earningsByDate.map(function (earn, index) {
-            if (index === 0) {
-              return (
-                <div key={index}>
-                  <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
-                  <p>
-                    {earn.name} {earn.treatments_earnings}
-                  </p>
-                </div>
-              );
-            } else if (
-              moment(earn.appointment_date).format("MMM Do YY") !==
-              moment(earningsByDate[index - 1].appointment_date).format(
-                "MMM Do YY"
-              )
-            ) {
-              return (
-                <div key={index}>
-                  <h1>{moment(earn.appointment_date).format("MMM Do YY")}</h1>
-                  <p>
-                    {earn.name} {earn.treatments_earnings}
-                  </p>
-                </div>
-              );
-            } else {
-              return (
-                <div key={index}>
-                  <p>
-                    {earn.name} {earn.treatments_earnings}
-                  </p>
-                </div>
-              );
-            }
-          })}
+      <div className="earnings_container">
+        <img src={Coin_light} className="coin_light" />
+        <h1 className="earnings">Earnings</h1>
+      </div>
+      <div className="total_container">
+        <div className="total_earnings">
+          <h1 className="earning-h1">Total Earnings</h1>
+          <p className="earning-p">{totalEarnings}$</p>
+        </div>
+        <div className="total_earnings">
+          <h1 className="earning-h1">Month Earnings</h1>
+          <p className="earning-p">{lastMonthEarnings}$</p>
+        </div>
+      </div>
+      <div className="Date_container">
+        <h1 className="earning-h1">Earnings By Date</h1>
+        <div className="earningsList_container">
+          {earningsByDate.length >= 1 &&
+            earningsByDate.map(function (earn, index) {
+              if (index === 0) {
+                return (
+                  <div key={index}>
+                    <h1 className="date-h1">
+                      {moment(earn.appointment_date).format("MMM Do YYYY")}
+                    </h1>
+                    <p className="treatment-p">
+                      {earn.name} {earn.treatments_earnings}$
+                    </p>
+                  </div>
+                );
+              } else if (
+                moment(earn.appointment_date).format("MMM Do YY") !==
+                moment(earningsByDate[index - 1].appointment_date).format(
+                  "MMM Do YY"
+                )
+              ) {
+                return (
+                  <div key={index}>
+                    <h1 className="date-h1">
+                      {moment(earn.appointment_date).format("MMM Do YYYY")}
+                    </h1>
+                    <p className="treatment-p">
+                      {earn.name} {earn.treatments_earnings}$
+                    </p>
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index}>
+                    <p className="treatment-p">
+                      {earn.name} {earn.treatments_earnings}$
+                    </p>
+                  </div>
+                );
+              }
+            })}
+        </div>
       </div>
     </div>
   );
