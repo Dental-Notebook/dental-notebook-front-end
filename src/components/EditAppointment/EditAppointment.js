@@ -3,6 +3,7 @@ import moment from "moment";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import axios from "axios";
+import XCircleRed from "../../assets/XCircleRed.svg";
 
 const EditAppointment = (props) => {
   /* appointment_id,
@@ -144,6 +145,19 @@ const EditAppointment = (props) => {
             type="datetime-local"
             required
           />
+          <button
+            onClick={() =>
+              props.handleDeleteAppointment(props.appointment.appointments_id)
+            }
+            className="appointments-delete-button"
+          >
+            {/* <img
+              src={XCircleRed}
+              alt="delte button"
+              className="appointments-delete-button-img"
+            /> */}
+            DELETE
+          </button>
 
           <button type="submit">SAVE</button>
           <button onClick={() => props.setIsEditModeActive(false)}>
