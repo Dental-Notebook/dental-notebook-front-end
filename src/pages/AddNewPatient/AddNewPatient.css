@@ -70,6 +70,7 @@ body {
   border: none;
   border-bottom: 1px solid #bbbdbd;
   font-size: 16px;
+  background-color: #fff;
 }
 
 .patient-form-personalInfo-container select {
