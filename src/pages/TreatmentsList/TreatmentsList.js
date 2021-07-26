@@ -1,6 +1,12 @@
 import React, { useContext } from "react";
 import EditTreatment from "../../components/EditTreatment/EditTreatment";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
+import Money_light from "../../assets/money-light.svg";
+import PlusCircleBlue from "../../assets/PlusCircleBlue.svg";
+// import Pencil from "../../assets/Pencil.svg";
+import Vector from "../../assets/Vector.svg"
+import "./PriceList.css"
+
 
 const TreatmentsList = () => {
   const {
@@ -16,19 +22,30 @@ const TreatmentsList = () => {
 
   return (
     <div>
-      <h1>Price List</h1>
+      <div className="title-container">
+      <img src={Money_light} className="money-pin" />
+      <h1 className = "title">Price List</h1>
+      </div>
       {/* ==============MAP TREATMENTS=============== */}
       {treatments.map((treatment) => {
         return (
-          <div key={treatment.id}>
-            <p>{treatment.name}</p>
-            <p>{treatment.price}$</p>
+          <div className="price-container" key={treatment.id}>
+            <p className = "treatment-name">{treatment.name}</p>
+            <div className="treatment-container">
+            <p className = "treatment-price">{treatment.price}$</p>
+            
             <EditTreatment
               {...treatment}
               setTreatments={setTreatments}
               treatments={treatments}
             />
-            <button onClick={() => handleDelete(treatment.id)}>Delete</button>
+            
+            <button className="delete-button2" onClick={() => handleDelete(treatment.id)}><img
+          src={Vector}
+          alt="delete button"
+          className="delete-button"
+        /></button>
+        </div>
           </div>
         );
       })}
@@ -57,8 +74,12 @@ const TreatmentsList = () => {
           </form>
         </div>
       ) : (
-        <button onClick={() => setIsAddNewTreatmentShown(true)}>
-          Add new treatment
+        <button  onClick={() => setIsAddNewTreatmentShown(true)} >
+          <img
+          src={PlusCircleBlue}
+          alt="add patient button"
+          className="add-patient-button"
+        />
         </button>
       )}
       {/* ==============ADD NEW TREATMENT END=============== */}
