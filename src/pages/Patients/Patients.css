@@ -36,6 +36,9 @@
   box-shadow: 0px 1px 2px 1px rgb(0 0 0 / 19%);
 }
 
+.patients-wrapper {
+  text-align: center;
+}
 .patients-info {
   width: 100%;
   display: flex;
