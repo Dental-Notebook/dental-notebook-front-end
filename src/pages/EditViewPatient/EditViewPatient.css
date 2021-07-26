@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .patient-container {
   width: 90%;
   margin: auto;
