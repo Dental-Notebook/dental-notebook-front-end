@@ -21,6 +21,8 @@
   font-weight: 300;
   align-self: flex-end;
 }
+
+/* CALENDAR CSS */
 .appointments-calendar {
   display: flex;
   justify-content: center;
@@ -29,6 +31,14 @@
 .appointments-calendar-info {
   border: none;
 }
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-weight: 800;
+  font-size: 18px;
+}
+
 .react-calendar__month-view__days__day--weekend {
   color: #24a4cc;
 }
@@ -45,6 +55,8 @@
 .react-calendar__tile--now {
   border-radius: 15px;
 }
+/* CALENDAR CSS END */
+
 .appointments-button-wrapper {
   height: 28px;
   width: 100%;

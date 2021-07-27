@@ -75,12 +75,10 @@
   height: 30px;
   width: auto;
 }
-.popup-button-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.popup-button-wrapper-addAppointment {
+  text-align: right;
 }
-.popup-button-wrapper button {
+.popup-button-wrapper-addAppointment button {
   border: none;
   background-color: transparent;
   cursor: pointer;
