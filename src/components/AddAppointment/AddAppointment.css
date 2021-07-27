@@ -1,9 +1,9 @@
-.edit-appointment-popup {
+.add-appointment-popup {
   text-align: left;
   font-size: 18px;
 }
-.edit-appointment-popup input,
-.edit-appointment-popup select {
+.add-appointment-popup input,
+.add-appointment-popup select {
   border: none;
   border-bottom: 1px solid #bbbdbd;
   font-size: 16px;
@@ -11,18 +11,18 @@
   width: 100%;
   margin-bottom: 1em;
 }
-.edit-appointment-title {
+.add-appointment-title {
   display: flex;
   margin: auto;
   font-size: 20px;
   margin-bottom: 1em;
   justify-content: center;
 }
-.edit-appointment-name {
+.add-appointment-name {
   margin-bottom: 0.8em;
   text-align: center;
 }
-.edit-appointment-name:nth-of-type(2) {
+.add-appointment-name:nth-of-type(2) {
   margin-bottom: 1em;
 }
 

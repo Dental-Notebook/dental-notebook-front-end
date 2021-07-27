@@ -4,7 +4,8 @@ import moment from "moment";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import { PatientsContext } from "../../contexts/PatientsContext";
-
+import DeleteCircle from "../../assets/DeleteCircle.svg";
+import "./AddAppointment.css";
 const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
   const [newAppointment, setNewAppointment] = useState({
     patient_id: 0,
@@ -90,63 +91,79 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
   };
 
   return (
-    <div>
+    <div className="add-appointment-popup">
       {/* ==============ADD APPOINTMENT=============== */}
+      <h3 className="add-appointment-title">Add New Appointment</h3>
+      <form
+        onSubmit={handleSubmitAddAppointment}
+        className="add-appointment-form"
+      >
+        <select
+          className="select-treatment"
+          name="patient_id"
+          onChange={handleAddNewAppointment}
+          required
+        >
+          <option value="">Select patient</option>
+          {patients.map((patient) => (
+            <option key={patient.patient_id} value={patient.patient_id}>
+              {patient.firstname} {patient.lastname} | {patient.phone}
+            </option>
+          ))}
+        </select>
 
-      <div>
-        <h1>Add New Appointment</h1>
-        <form onSubmit={handleSubmitAddAppointment}>
-          <select name="patient_id" onChange={handleAddNewAppointment} required>
-            <option value="">Select patient</option>
-            {patients.map((patient) => (
-              <option key={patient.patient_id} value={patient.patient_id}>
-                {patient.firstname} {patient.lastname} | {patient.phone}
-              </option>
-            ))}
-          </select>
-
-          <label>
-            Treatment:
-            <select onChange={handleAddTreatmentToAppointment} required>
-              <option value="">Select treatment</option>
-              {treatments.map((treatment) => (
-                <option key={treatment.id} value={treatment.id}>
-                  {treatment.name}
-                </option>
-              ))}
-            </select>
-            <div>
-              {treatments.map(
-                (treatment) =>
-                  newAppointment.appointment_treatments.find(
-                    (item) => treatment.id === item.treatment_id
-                  ) && (
-                    <React.Fragment key={treatment.id}>
-                      <p>{treatment.name}</p>
-                      <button
-                        style={{ backgroundColor: "coral" }}
-                        onClick={() =>
-                          handleDeleteTreatmentFromAppointment(treatment.id)
-                        }
-                      >
-                        x
-                      </button>
-                    </React.Fragment>
-                  )
-              )}
-            </div>
-          </label>
-          <input
-            value={newAppointment.appointment_date}
-            onChange={handleAddNewAppointment}
-            name="appointment_date"
-            type="datetime-local"
-            required
-          />
+        <label
+          htmlFor="selectTreatmentInput"
+          className="label-select-treatment"
+        >
+          Treatment:
+        </label>
+        <select onChange={handleAddTreatmentToAppointment} required>
+          <option value="">Select treatment</option>
+          {treatments.map((treatment) => (
+            <option key={treatment.id} value={treatment.id}>
+              {treatment.name}
+            </option>
+          ))}
+        </select>
+        <div>
+          {treatments.map(
+            (treatment) =>
+              newAppointment.appointment_treatments.find(
+                (item) => treatment.id === item.treatment_id
+              ) && (
+                <div className="delete-treatment" key={treatment.id}>
+                  <p className="delete-treatment-name">{treatment.name}</p>
+                  <button
+                    className="delete-treatment-button"
+                    onClick={() =>
+                      handleDeleteTreatmentFromAppointment(treatment.id)
+                    }
+                  >
+                    <img
+                      src={DeleteCircle}
+                      alt="delete button"
+                      className="delete-treatment-img"
+                    />
+                  </button>
+                </div>
+              )
+          )}
+        </div>
+        <input
+          value={newAppointment.appointment_date}
+          onChange={handleAddNewAppointment}
+          name="appointment_date"
+          type="datetime-local"
+          required
+        />
+        <div className="popup-button-wrapper">
+          <button type="button" onClick={handleCancel}>
+            CANCEL
+          </button>
           <button type="submit">SAVE</button>
-          <button onClick={handleCancel}>CANCEL</button>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

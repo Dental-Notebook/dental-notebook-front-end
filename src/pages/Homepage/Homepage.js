@@ -6,7 +6,7 @@ import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import EditAppointment from "../../components/EditAppointment/EditAppointment";
 import Footer from "../../components/Footer/Footer";
 import AddAppointment from "../../components/AddAppointment/AddAppointment";
-import calendar_icon from "../../assets/calendarLight.svg";
+import calendarLight from "../../assets/calendarLight.svg";
 import CaretRightBlue from "../../assets/CaretRightBlue.svg";
 import X from "../../assets/X.svg";
 import Modal from "../../components/Modal/Modal";
@@ -90,7 +90,7 @@ const Homepage = () => {
     <div className="homepage-container">
       <div className="title-container">
         <img
-          src={calendar_icon}
+          src={calendarLight}
           alt="calendar_icon"
           className="calendar-icon"
         />
