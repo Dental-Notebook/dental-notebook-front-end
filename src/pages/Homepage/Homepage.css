@@ -2,6 +2,7 @@
   max-width: 600px;
   margin: auto;
   width: 90%;
+  padding-bottom: 70px;
 }
 
 /* CURRENT DATE */
@@ -172,7 +173,6 @@
   border: none;
   border-bottom: 1px solid grey;
   margin: 10px 0px 10px 0px;
-  color: lime;
 }
 
 .addtodo-buttons-container {

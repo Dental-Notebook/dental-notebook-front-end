@@ -99,9 +99,11 @@ const Homepage = () => {
 
       <h1 className="appointments-title">Appointments</h1>
       {isAddNewAppointmentShown ? (
-        <AddAppointment
-          setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
-        />
+        <Modal>
+          <AddAppointment
+            setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
+          />
+        </Modal>
       ) : null}
       {appointments
         .sort((a, b) => (a.appointment_date > b.appointment_date ? 1 : -1))
