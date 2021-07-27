@@ -17,7 +17,7 @@ const PatientsProvider = (props) => {
       .catch((err) => alert(err));
   };
 
-  console.log(patients);
+  // console.log(patients);
 
   return (
     <PatientsContext.Provider value={{ patients, setPatients }}>

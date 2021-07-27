@@ -159,3 +159,33 @@
   text-align: end;
   margin: 20px 0px 20px 0px;
 }
+
+/* ADD TO DO ITEM */
+
+.addtodo-container {
+  text-align: center;
+}
+
+.addtodo-input {
+  border: none;
+  border-bottom: 1px solid grey;
+  margin: 10px 0px 10px 0px;
+  color: lime;
+}
+
+.addtodo-buttons-container {
+  text-align: right;
+  background-color: none;
+}
+
+.cancel-todo {
+  color: grey;
+  border: none;
+  background-color: transparent;
+}
+
+.add-todo {
+  color: #3eadcf;
+  border: none;
+  background-color: transparent;
+}
