@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import Pencil from "../../assets/Pencil.svg";
+import Modal from "../Modal/Modal";
+import "./EditTreatment.css";
 
 const EditTreatment = (props) => {
   const { name, price, treatments, id } = props;
@@ -41,24 +43,26 @@ const EditTreatment = (props) => {
     <div>
       {/* ==============EDIT TREATMENT=============== */}
       {isEditModeActive ? (
-        <div>
-          <form onSubmit={handleSubmitEditTreatment}>
+        <Modal>
+          <form className= "form-container" onSubmit={handleSubmitEditTreatment}>
             <input
+              className ="input-name"
               value={editTreatment.name}
               onChange={handleChangeEdit}
               name="name"
               type="text"
             />
             <input
+              className ="input-price"
               value={editTreatment.price}
               onChange={handleChangeEdit}
               name="price"
               type="number"
             />
-            <button type="submit">SAVE</button>
-            <button onClick={() => setIsEditModeActive(false)}>CANCEL</button>
+            <button className="button-save" type="submit">SAVE</button>
+            <button className="button-cancel" onClick={() => setIsEditModeActive(false)}>CANCEL</button>
           </form>
-        </div>
+        </Modal>
       ) : (
         <button className="edit-button" onClick={() => setIsEditModeActive(true)}>
           <img

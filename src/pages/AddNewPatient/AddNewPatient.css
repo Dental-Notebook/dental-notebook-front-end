@@ -5,7 +5,7 @@ body {
 .patient-container {
   width: 90%;
   margin: auto;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
 }
 
 .patient-title {
@@ -169,9 +169,8 @@ body {
   right: 20px;
   border: none;
   background-color: transparent;
-  width: 70px;
-  height: 70px;
   cursor: pointer;
+  padding: 0;
 }
 /* SUBMIT BUTTON END */
 

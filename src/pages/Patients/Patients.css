@@ -1,6 +1,6 @@
-/* .patients-wrapper {
- 
-} */
+.patients-wrapper {
+  padding-bottom: 100px;
+}
 .patients-title {
   display: flex;
   align-items: center;
@@ -68,5 +68,4 @@
   cursor: pointer;
   bottom: 25px;
   right: 20px;
-
 }

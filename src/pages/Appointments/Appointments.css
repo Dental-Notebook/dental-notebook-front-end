@@ -1,5 +1,6 @@
 .appointments-wrapper {
   text-align: center;
+  padding-bottom: 100px;
 }
 .appointments-title {
   display: flex;
@@ -87,6 +88,7 @@
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 1px 2px 1px rgb(0 0 0 / 19%);
+  cursor: pointer;
 }
 /* .appointments-delete-button {
   background: transparent;

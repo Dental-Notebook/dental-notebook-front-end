@@ -59,6 +59,7 @@ const TreatmentsList = () => {
         <Modal>
           <form onSubmit={handleSubmitNewTreatment}>
             <input
+              className="input-treatment-name"
               value={newTreatment.name}
               onChange={handleAddNewTreatment}
               name="name"
@@ -66,20 +67,25 @@ const TreatmentsList = () => {
               type="text"
             />
             <input
+              className="input-treatment-price"
               value={newTreatment.price}
               onChange={handleAddNewTreatment}
               name="price"
               placeholder="Price"
               type="number"
             />
-            <button type="submit">ADD</button>
-            <button onClick={() => setIsAddNewTreatmentShown(false)}>
+
+            <button className="button-save1" type="submit">ADD</button>
+            <button className="button-cancel1" onClick={() => setIsAddNewTreatmentShown(false)}>
               CANCEL
             </button>
           </form>
         </Modal>
       ) : (
-        <button onClick={() => setIsAddNewTreatmentShown(true)}>
+        <button
+          className="add-button"
+          onClick={() => setIsAddNewTreatmentShown(true)}
+        >
           <img
             src={PlusCircleBlue}
             alt="add patient button"
