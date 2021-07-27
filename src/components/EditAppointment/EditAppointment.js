@@ -169,19 +169,24 @@ const EditAppointment = (props) => {
           type="datetime-local"
           required
         />
-        <button type="button" onClick={() => props.setIsEditModeActive(false)}>
-          CANCEL
-        </button>
-        <button type="submit">SAVE</button>
-        <button
-          type="button"
-          onClick={() =>
-            handleDeleteAppointment(editedAppointment.appointment_id)
-          }
-          className="appointments-delete-button"
-        >
-          DELETE
-        </button>
+        <div className="popup-button-wrapper">
+          <button
+            type="button"
+            onClick={() => props.setIsEditModeActive(false)}
+          >
+            CANCEL
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              handleDeleteAppointment(editedAppointment.appointment_id)
+            }
+            className="appointments-delete-button"
+          >
+            DELETE
+          </button>
+          <button type="submit">SAVE</button>
+        </div>
       </form>
     </div>
   );

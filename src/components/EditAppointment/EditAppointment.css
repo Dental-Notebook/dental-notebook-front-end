@@ -9,6 +9,7 @@
   font-size: 16px;
   height: 40px;
   width: 100%;
+  margin-bottom: 1em;
 }
 .edit-appointment-title {
   display: flex;
@@ -18,7 +19,8 @@
   justify-content: center;
 }
 .edit-appointment-name {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.8em;
+  text-align: center;
 }
 .edit-appointment-name:nth-of-type(2) {
   margin-bottom: 1em;
@@ -48,6 +50,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50px;
+  margin: auto 15px 15px 0;
 }
 
 .delete-treatment-button {
@@ -58,8 +61,21 @@
   justify-content: center;
   align-items: center;
   padding: 0;
+  cursor: pointer;
 }
 .delete-treatment-img {
-  height: 50px;
+  height: 30px;
   width: auto;
+}
+.popup-button-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.popup-button-wrapper button {
+  border-radius: 100px;
+  border: none;
+  background-color: #25a4cc;
+  color: #fff;
+  padding: 0.6em 0.75em;
 }
