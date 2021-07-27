@@ -4,9 +4,9 @@ import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import Money_light from "../../assets/money-light.svg";
 import PlusCircleBlue from "../../assets/PlusCircleBlue.svg";
 // import Pencil from "../../assets/Pencil.svg";
-import Vector from "../../assets/Vector.svg"
-import "./PriceList.css"
-
+import Vector from "../../assets/Vector.svg";
+import "./PriceList.css";
+import Modal from "../../components/Modal/Modal";
 
 const TreatmentsList = () => {
   const {
@@ -23,35 +23,40 @@ const TreatmentsList = () => {
   return (
     <div>
       <div className="title-container">
-      <img src={Money_light} className="money-pin" />
-      <h1 className = "title">Price List</h1>
+        <img src={Money_light} className="money-pin" />
+        <h1 className="title">Price List</h1>
       </div>
       {/* ==============MAP TREATMENTS=============== */}
       {treatments.map((treatment) => {
         return (
           <div className="price-container" key={treatment.id}>
-            <p className = "treatment-name">{treatment.name}</p>
+            <p className="treatment-name">{treatment.name}</p>
             <div className="treatment-container">
-            <p className = "treatment-price">{treatment.price}$</p>
-            
-            <EditTreatment
-              {...treatment}
-              setTreatments={setTreatments}
-              treatments={treatments}
-            />
-            
-            <button className="delete-button2" onClick={() => handleDelete(treatment.id)}><img
-          src={Vector}
-          alt="delete button"
-          className="delete-button"
-        /></button>
-        </div>
+              <p className="treatment-price">{treatment.price}$</p>
+
+              <EditTreatment
+                {...treatment}
+                setTreatments={setTreatments}
+                treatments={treatments}
+              />
+
+              <button
+                className="delete-button2"
+                onClick={() => handleDelete(treatment.id)}
+              >
+                <img
+                  src={Vector}
+                  alt="delete button"
+                  className="delete-button"
+                />
+              </button>
+            </div>
           </div>
         );
       })}
       {/* ==============ADD NEW TREATMENT=============== */}
       {isAddNewTreatmentShown ? (
-        <div>
+        <Modal>
           <form onSubmit={handleSubmitNewTreatment}>
             <input
               value={newTreatment.name}
@@ -72,14 +77,14 @@ const TreatmentsList = () => {
               CANCEL
             </button>
           </form>
-        </div>
+        </Modal>
       ) : (
-        <button  onClick={() => setIsAddNewTreatmentShown(true)} >
+        <button onClick={() => setIsAddNewTreatmentShown(true)}>
           <img
-          src={PlusCircleBlue}
-          alt="add patient button"
-          className="add-patient-button"
-        />
+            src={PlusCircleBlue}
+            alt="add patient button"
+            className="add-patient-button"
+          />
         </button>
       )}
       {/* ==============ADD NEW TREATMENT END=============== */}
