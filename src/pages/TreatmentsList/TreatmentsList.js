@@ -92,11 +92,7 @@ const TreatmentsList = () => {
           className="add-button"
           onClick={() => setIsAddNewTreatmentShown(true)}
         >
-          <img
-            src={PlusCircleBlue}
-            alt="add patient button"
-            className="add-patient-button"
-          />
+          <img src={PlusCircleBlue} alt="add patient button" />
         </button>
       )}
       {/* ==============ADD NEW TREATMENT END=============== */}
