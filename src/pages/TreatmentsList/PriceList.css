@@ -68,18 +68,9 @@
 .add-button {
   background: none;
   border: none;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 25px;
-  margin-right: 20px;
-}
-.add-patient-button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 25px;
-  margin-right: 20px;
-  background: none;
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
 }
 
 .button-edit-treatment {
