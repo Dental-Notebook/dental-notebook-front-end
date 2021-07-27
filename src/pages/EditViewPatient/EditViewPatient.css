@@ -170,9 +170,8 @@ body {
   right: 20px;
   border: none;
   background-color: transparent;
-  width: 70px;
-  height: 70px;
   cursor: pointer;
+  padding: 0;
 }
 /* SUBMIT BUTTON END */
 

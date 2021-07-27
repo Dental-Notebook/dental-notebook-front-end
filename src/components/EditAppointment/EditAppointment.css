@@ -45,9 +45,11 @@
 
 .delete-treatment-wrapper {
   display: flex;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
   align-items: center;
   flex-wrap: wrap;
+  overflow-y: auto;
+  max-height: 200px;
 }
 .delete-treatment {
   padding: 0.5em 0.75em;

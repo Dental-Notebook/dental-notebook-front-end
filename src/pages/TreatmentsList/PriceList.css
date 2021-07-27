@@ -24,7 +24,7 @@
 
 .title {
   font-size: 22px;
-  font-weight: 300px;
+  font-weight: 300;
   text-align: center;
 }
 
@@ -61,14 +61,13 @@
   border: none;
   height: fit-content;
 }
-.add-button{
-    background: none;
-    border: none;
-    bottom: 0;
-    right: 0;
-    margin-bottom: 25px;
-    margin-right: 20px;
-
+.add-button {
+  background: none;
+  border: none;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 25px;
+  margin-right: 20px;
 }
 .add-patient-button {
   position: fixed;
