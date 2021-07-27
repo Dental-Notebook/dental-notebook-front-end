@@ -88,10 +88,13 @@ const Appointments = () => {
             ) : null}
           </div>
         ))}
+
       {isAddNewAppointmentShown ? (
-        <AddAppointment
-          setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
-        />
+        <Modal>
+          <AddAppointment
+            setIsAddNewAppointmentShown={setIsAddNewAppointmentShown}
+          />
+        </Modal>
       ) : (
         <button
           onClick={() => setIsAddNewAppointmentShown(true)}
