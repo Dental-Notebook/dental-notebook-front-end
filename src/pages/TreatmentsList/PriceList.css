@@ -2,19 +2,18 @@
   font-family: roboto;
 }
 .title-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2.2em;
-    margin-top: 1.5em;
-    align-self: flex-end;
-    line-height: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.2em;
+  margin-top: 1.5em;
+  align-self: flex-end;
+  line-height: 27px;
 }
 
 .treatment-container {
-display: flex;
-justify-content: space-be
-
+  display: flex;
+  justify-content: space-be;
 }
 
 .money-pin {
@@ -27,7 +26,6 @@ justify-content: space-be
   font-size: 22px;
   font-weight: 300px;
   text-align: center;
-  
 }
 
 .price-container {
@@ -37,7 +35,6 @@ justify-content: space-be
   justify-content: space-between;
   max-width: 600px;
   margin: auto;
-  
 }
 
 .treatment-name {
@@ -57,15 +54,12 @@ justify-content: space-be
   text-align: center;
   border-radius: 50%;
   display: block;
-  
- 
 }
 
-.delete-button2{
-    background: none;
-    border: none;
-    height: fit-content;
-
+.delete-button2 {
+  background: none;
+  border: none;
+  height: fit-content;
 }
 .add-button{
     background: none;
@@ -77,12 +71,10 @@ justify-content: space-be
 
 }
 .add-patient-button {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 25px;
-  margin-right: 20px;
-  background: none;
+  position: fixed;
+  cursor: pointer;
+  bottom: 25px;
+  right: 20px;
 }
 
 .button-edit-treatment {
@@ -92,9 +84,8 @@ justify-content: space-be
   border-radius: 50%;
   display: block;
   align-items: flex-end;
-
 }
-.edit-button{
-    background: none;
-    border: none;
+.edit-button {
+  background: none;
+  border: none;
 }
