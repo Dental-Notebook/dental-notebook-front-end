@@ -6,6 +6,7 @@
   background-color: #25a4cc;
   padding: 25px 0 15px;
   position: relative;
+  z-index: 10;
   max-height: 90px;
   min-height: 80px;
 }
@@ -48,7 +49,7 @@
   overflow: hidden;
   max-width: 290px;
   transform: translateX(-290px);
-  z-index: 9;
+  z-index: 15;
   transition: transform 500ms ease-out;
 }
 

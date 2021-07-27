@@ -118,7 +118,11 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
         >
           Treatment:
         </label>
-        <select onChange={handleAddTreatmentToAppointment} required>
+        <select
+          className="select-treatment"
+          onChange={handleAddTreatmentToAppointment}
+          required
+        >
           <option value="">Select treatment</option>
           {treatments.map((treatment) => (
             <option key={treatment.id} value={treatment.id}>
@@ -158,10 +162,16 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
           required
         />
         <div className="popup-button-wrapper">
-          <button type="button" onClick={handleCancel}>
+          <button
+            className="cancel-button"
+            type="button"
+            onClick={handleCancel}
+          >
             CANCEL
           </button>
-          <button type="submit">SAVE</button>
+          <button className="submit-button" type="submit">
+            SAVE
+          </button>
         </div>
       </form>
     </div>
