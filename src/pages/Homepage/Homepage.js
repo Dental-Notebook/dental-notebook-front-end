@@ -9,6 +9,7 @@ import AddAppointment from "../../components/AddAppointment/AddAppointment";
 import calendarLight from "../../assets/calendarLight.svg";
 import CaretRightBlue from "../../assets/CaretRightBlue.svg";
 import X from "../../assets/X.svg";
+import Modal from "../../components/Modal/Modal";
 
 const Homepage = () => {
   const [todos, setTodos] = useState([]);
@@ -138,13 +139,21 @@ const Homepage = () => {
             </button>
             {isEditModeActive &&
             appointment.appointments_id === appointmentId ? (
-              <EditAppointment
-                {...appointment}
-                setIsEditModeActive={setIsEditModeActive}
-              />
+              <Modal>
+                <EditAppointment
+                  {...appointment}
+                  setIsEditModeActive={setIsEditModeActive}
+                />
+              </Modal>
             ) : null}
           </div>
         ))}
+
+      {appointments.filter(
+        (appointment) =>
+          moment(appointment.appointment_date).format("dddd Do MMMM YYYY") ===
+          moment.utc(moment()).format("dddd Do MMMM YYYY")
+      ).length === 0 && <p>No appointments for today</p>}
 
       <div className="todos-container">
         <h1 className="todos-title">To do</h1>
@@ -173,17 +182,33 @@ const Homepage = () => {
 
       <div>
         {isAddNewTodoShown ? (
-          <form onSubmit={handleSubmitNewAddTodo}>
-            <label htmlFor="todo_item">+Add to do item</label>
-            <input
-              value={addNewTodo.todo_item}
-              onChange={handleAddNewTodo}
-              name="todo_item"
-              id="todo_item"
-            />
-            <button type="submit">ADD</button>
-            <button onClick={() => setIsAddNewTodoShown(false)}>CANCEL</button>
-          </form>
+          <Modal>
+            <form onSubmit={handleSubmitNewAddTodo}>
+              <div className="addtodo-container">
+                <label htmlFor="todo_item">Add to do item</label>
+                <input
+                  value={addNewTodo.todo_item}
+                  onChange={handleAddNewTodo}
+                  name="todo_item"
+                  id="todo_item"
+                  placeholder="To do"
+                  className="addtodo-input"
+                />
+              </div>
+              <div className="addtodo-buttons-container">
+                {" "}
+                <button
+                  className="cancel-todo"
+                  onClick={() => setIsAddNewTodoShown(false)}
+                >
+                  CANCEL
+                </button>
+                <button className="add-todo" type="submit">
+                  ADD
+                </button>
+              </div>
+            </form>
+          </Modal>
         ) : (
           <div className="add-todo-button-container">
             <button
