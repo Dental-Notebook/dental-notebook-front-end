@@ -4,6 +4,8 @@ import { AppointmentsContext } from "../../contexts/AppointmentsContext";
 import { TreatmentsContext } from "../../contexts/TreatmentsContext";
 import axios from "axios";
 import XCircleRed from "../../assets/XCircleRed.svg";
+import DeleteCircle from "../../assets/DeleteCircle.svg";
+import "./EditAppointment.css";
 
 const EditAppointment = (props) => {
   const [editedAppointment, setEditedAppointment] = useState({
@@ -45,7 +47,6 @@ const EditAppointment = (props) => {
       });
     }
   };
-
   const handleSubmitEditTreatment = (event) => {
     event.preventDefault();
 
@@ -90,46 +91,77 @@ const EditAppointment = (props) => {
     setEditedAppointment({ ...editedAppointment, [name]: value });
   };
 
+  /* ==============DELETE APPOINTMENTS=============== */
+  const handleDeleteAppointment = (appointmentId) => {
+    const deleteConfirmation = window.confirm(
+      "Are you sure you want to delete this appointment?"
+    );
+
+    if (deleteConfirmation) {
+      //setIsEditModeActive(false);
+      axios
+        .delete(`/appointments/${appointmentId}`)
+        .then((response) => {
+          const filteredAppointments = appointments.filter(
+            (appointment) => appointment.appointments_id !== appointmentId
+          );
+
+          setAppointments(filteredAppointments);
+        })
+        .catch((error) => alert(error));
+    }
+  };
+
   return (
-    <div className="eddit-appointment-popup">
+    <div className="edit-appointment-popup">
       {/* ==============EDIT APPOINTMENT=============== */}
+      <h3 className="edit-appointment-title">View/edit Appointment</h3>
       <form
         onSubmit={handleSubmitEditTreatment}
-        className="eddit-appointment-form"
+        className="edit-appointment-form"
       >
-        <p className="eddit-appointment-name">
+        <p className="edit-appointment-name">
           {editedAppointment.firstname} {editedAppointment.lastname}
         </p>
-        <p className="eddit-appointment-name"> {editedAppointment.phone}</p>
+        <p className="edit-appointment-name"> {editedAppointment.phone}</p>
 
-        <label>
-          Treatment:
-          <select onChange={handleEditTreatmentToAppointment}>
-            <option value="">Select treatment</option>
-            {treatments.map((treatment) => (
-              <option key={treatment.id} value={treatment.id}>
-                {treatment.name}
-              </option>
-            ))}
-          </select>
-          <div>
-            {editedAppointment.treatments.map((treatment) => (
-              <React.Fragment key={treatment.id}>
-                <p>{treatment.name}</p>
-                <button
-                  style={{ backgroundColor: "coral" }}
-                  onClick={() =>
-                    handleDeleteTreatmentFromAppointment(
-                      treatment.treatments_id
-                    )
-                  }
-                >
-                  x
-                </button>
-              </React.Fragment>
-            ))}
-          </div>
+        <label
+          htmlFor="selectTreatmentInput"
+          className="label-select-treatment"
+        >
+          Treatment:{" "}
         </label>
+        <select
+          onChange={handleEditTreatmentToAppointment}
+          className="select-treatment"
+        >
+          <option value="">Select treatment</option>
+          {treatments.map((treatment) => (
+            <option key={treatment.id} value={treatment.id}>
+              {treatment.name}
+            </option>
+          ))}
+        </select>
+
+        <div className="delete-treatment-wrapper">
+          {editedAppointment.treatments.map((treatment) => (
+            <div className="delete-treatment" key={treatment.id}>
+              <p className="delete-treatment-name">{treatment.name}</p>
+              <button
+                className="delete-treatment-button"
+                onClick={() =>
+                  handleDeleteTreatmentFromAppointment(treatment.treatments_id)
+                }
+              >
+                <img
+                  src={DeleteCircle}
+                  alt="delete button"
+                  className="delete-treatment-img"
+                />
+              </button>
+            </div>
+          ))}
+        </div>
         <input
           onChange={handleEditAppointmentDate}
           value={editedAppointment.appointment_date}
@@ -137,21 +169,20 @@ const EditAppointment = (props) => {
           type="datetime-local"
           required
         />
-        <button onClick={() => props.setIsEditModeActive(false)}>CANCEL</button>
+        <button type="button" onClick={() => props.setIsEditModeActive(false)}>
+          CANCEL
+        </button>
         <button type="submit">SAVE</button>
+        <button
+          type="button"
+          onClick={() =>
+            handleDeleteAppointment(editedAppointment.appointment_id)
+          }
+          className="appointments-delete-button"
+        >
+          DELETE
+        </button>
       </form>
-      <button
-        onClick={() =>
-          props.handleDeleteAppointment(editedAppointment.appointment_id)
-        }
-        className="appointments-delete-button"
-      >
-        <img
-          src={XCircleRed}
-          alt="delte button"
-          className="appointments-delete-button-img"
-        />
-      </button>
     </div>
   );
 };

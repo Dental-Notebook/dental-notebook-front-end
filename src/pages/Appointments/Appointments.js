@@ -21,27 +21,6 @@ const Appointments = () => {
   const [isAddNewAppointmentShown, setIsAddNewAppointmentShown] =
     useState(false);
 
-  /* ==============DELETE APPOINTMENTS=============== */
-  const handleDeleteAppointment = (appointmentId) => {
-    const deleteConfirmation = window.confirm(
-      "Are you sure you want to delete this appointment?"
-    );
-
-    if (deleteConfirmation) {
-      //setIsEditModeActive(false);
-      axios
-        .delete(`/appointments/${appointmentId}`)
-        .then((response) => {
-          const filteredAppointments = appointments.filter(
-            (appointment) => appointment.appointments_id !== appointmentId
-          );
-
-          setAppointments(filteredAppointments);
-        })
-        .catch((error) => alert(error));
-    }
-  };
-
   const handleAppointmentIdOnClick = (id) => {
     setAppointmentId(id);
     setIsEditModeActive(true);
@@ -103,7 +82,6 @@ const Appointments = () => {
               <Modal>
                 <EditAppointment
                   {...appointment}
-                  handleDeleteAppointment={handleDeleteAppointment}
                   setIsEditModeActive={setIsEditModeActive}
                 />
               </Modal>
