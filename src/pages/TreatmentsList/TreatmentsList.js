@@ -21,7 +21,7 @@ const TreatmentsList = () => {
   } = useContext(TreatmentsContext);
 
   return (
-    <div>
+    <div className="priceList-container">
       <div className="title-container">
         <img src={Money_light} className="money-pin" />
         <h1 className="title">Price List</h1>
@@ -74,11 +74,17 @@ const TreatmentsList = () => {
               placeholder="Price"
               type="number"
             />
-
-            <button className="button-save1" type="submit">ADD</button>
-            <button className="button-cancel1" onClick={() => setIsAddNewTreatmentShown(false)}>
-              CANCEL
-            </button>
+            <div className="addTreatment-button-container">
+              <button
+                className="button-cancel1"
+                onClick={() => setIsAddNewTreatmentShown(false)}
+              >
+                CANCEL
+              </button>
+              <button className="button-save1" type="submit">
+                ADD
+              </button>
+            </div>
           </form>
         </Modal>
       ) : (

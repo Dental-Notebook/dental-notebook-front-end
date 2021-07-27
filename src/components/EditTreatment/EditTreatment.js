@@ -44,31 +44,43 @@ const EditTreatment = (props) => {
       {/* ==============EDIT TREATMENT=============== */}
       {isEditModeActive ? (
         <Modal>
-          <form className= "form-container" onSubmit={handleSubmitEditTreatment}>
+          <form className="form-container" onSubmit={handleSubmitEditTreatment}>
             <input
-              className ="input-name"
+              className="input-name"
               value={editTreatment.name}
               onChange={handleChangeEdit}
               name="name"
               type="text"
             />
             <input
-              className ="input-price"
+              className="input-price"
               value={editTreatment.price}
               onChange={handleChangeEdit}
               name="price"
               type="number"
             />
-            <button className="button-save" type="submit">SAVE</button>
-            <button className="button-cancel" onClick={() => setIsEditModeActive(false)}>CANCEL</button>
+            <div className="editTreatment-button-container">
+              <button
+                className="button-cancel"
+                onClick={() => setIsEditModeActive(false)}
+              >
+                CANCEL
+              </button>
+              <button className="button-save" type="submit">
+                SAVE
+              </button>
+            </div>
           </form>
         </Modal>
       ) : (
-        <button className="edit-button" onClick={() => setIsEditModeActive(true)}>
+        <button
+          className="edit-button"
+          onClick={() => setIsEditModeActive(true)}
+        >
           <img
-          src={Pencil}
-          alt="edit treatment button"
-          className="button-edit-treatment"
+            src={Pencil}
+            alt="edit treatment button"
+            className="button-edit-treatment"
           />
         </button>
       )}

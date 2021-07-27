@@ -171,13 +171,6 @@ const EditAppointment = (props) => {
         />
         <div className="popup-button-wrapper">
           <button
-            className="cancel-button"
-            type="button"
-            onClick={() => props.setIsEditModeActive(false)}
-          >
-            CANCEL
-          </button>
-          <button
             type="button"
             onClick={() =>
               handleDeleteAppointment(editedAppointment.appointment_id)
@@ -185,6 +178,13 @@ const EditAppointment = (props) => {
             className="appointments-delete-button"
           >
             DELETE
+          </button>
+          <button
+            className="cancel-button"
+            type="button"
+            onClick={() => props.setIsEditModeActive(false)}
+          >
+            CANCEL
           </button>
           <button className="submit-button" type="submit">
             SAVE
