@@ -362,7 +362,7 @@ const EditViewPatient = (props) => {
       </div>
       <div className="patient-appointments-container">
         <h3>Appointments</h3>
-        {appointments.length &&
+        {appointments.length > 0 &&
           appointments
             .filter((item) => item.patient_id === Number(props.match.params.id))
             .map((element, index) => (
@@ -375,12 +375,24 @@ const EditViewPatient = (props) => {
                   <p>Appointment for</p>
                   <ul>
                     {element.treatments.map((item) => (
-                      <li key={item.id}>{item.name}</li>
+                      <li
+                        className="patient-appointments-treatments-li"
+                        key={item.id}
+                      >
+                        {item.name}
+                      </li>
                     ))}
                   </ul>
                 </div>
               </div>
             ))}
+        {appointments.filter(
+          (item) => item.patient_id === Number(props.match.params.id)
+        ).length === 0 && (
+          <p className="patient-noAppointments">
+            No appointments for this patient.
+          </p>
+        )}
       </div>
     </div>
   );
