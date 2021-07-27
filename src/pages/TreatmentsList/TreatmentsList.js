@@ -6,7 +6,7 @@ import PlusCircleBlue from "../../assets/PlusCircleBlue.svg";
 // import Pencil from "../../assets/Pencil.svg";
 import Vector from "../../assets/Vector.svg"
 import "./PriceList.css"
-
+import Modal from "../../components/Modal/Modal";
 
 const TreatmentsList = () => {
   const {
@@ -67,6 +67,7 @@ const TreatmentsList = () => {
               placeholder="Price"
               type="number"
             />
+           
             <button type="submit">ADD</button>
             <button onClick={() => setIsAddNewTreatmentShown(false)}>
               CANCEL
@@ -74,13 +75,15 @@ const TreatmentsList = () => {
           </form>
         </div>
       ) : (
-        <button  onClick={() => setIsAddNewTreatmentShown(true)} >
+        
+        <button className="add-button" onClick={() => setIsAddNewTreatmentShown(true)} >
           <img
           src={PlusCircleBlue}
           alt="add patient button"
           className="add-patient-button"
         />
         </button>
+        
       )}
       {/* ==============ADD NEW TREATMENT END=============== */}
     </div>
