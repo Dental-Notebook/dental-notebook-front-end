@@ -185,9 +185,11 @@ const Homepage = () => {
       <div>
         {isAddNewTodoShown ? (
           <Modal>
-            <form onSubmit={handleSubmitNewAddTodo}>
+            <form className="addtodo-form" onSubmit={handleSubmitNewAddTodo}>
               <div className="addtodo-container">
-                <label htmlFor="todo_item">Add to do item</label>
+                <label className="addtodo-container-label" htmlFor="todo_item">
+                  Add to do item
+                </label>
                 <input
                   value={addNewTodo.todo_item}
                   onChange={handleAddNewTodo}

@@ -261,12 +261,19 @@ body {
 .patient-appointments-treatments {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   margin-top: 5px;
 }
 
-.patient-appointments-treatments ul > li {
+.patient-appointments-treatments-li + .patient-appointments-treatments-li {
   margin-top: 8px;
+}
+
+.patient-noAppointments {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2em;
+  color: #757575;
 }
 
 /* PATIENT APPOINTMENTS END */

@@ -165,19 +165,38 @@
 
 /* ADD TO DO ITEM */
 
+.addtodo-form {
+  min-width: 200px;
+}
+
 .addtodo-container {
   text-align: center;
 }
 
+.addtodo-container-label {
+  font-size: 20px;
+  font-weight: 300;
+}
+
 .addtodo-input {
   border: none;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #bbbdbd;
+  font-size: 16px;
+  height: 40px;
+  width: 100%;
   margin: 10px 0px 10px 0px;
 }
 
 .addtodo-buttons-container {
   text-align: right;
   background-color: none;
+}
+
+.addtodo-buttons-container button {
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .cancel-todo {

@@ -161,7 +161,7 @@ const AddAppointment = ({ setIsAddNewAppointmentShown }) => {
           type="datetime-local"
           required
         />
-        <div className="popup-button-wrapper">
+        <div className="popup-button-wrapper-addAppointment">
           <button
             className="cancel-button"
             type="button"
