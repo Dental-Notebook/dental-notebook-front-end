@@ -9,6 +9,7 @@ import "./EditViewPatient.css";
 import AddNewPatientIcon from "../../assets/AddNewPatientIcon.svg";
 import CheckCircleGreen from "../../assets/CheckCircleGreen.svg";
 import XCircleRed from "../../assets/XCircleRed.svg";
+import { v4 as uuidv4 } from "uuid";
 
 const EditViewPatient = (props) => {
   const { patients, setPatients } = useContext(PatientsContext);
@@ -132,7 +133,10 @@ const EditViewPatient = (props) => {
 
   const handleSubmitViewEditPatientTeethMap = (event) => {
     event.preventDefault();
-    viewEditPatientTreatments.push(viewEditPatientTreatmentsForm);
+    setViewEditPatientTreatments([
+      ...viewEditPatientTreatments,
+      { ...viewEditPatientTreatmentsForm, temporary_id: uuidv4() },
+    ]);
     setViewEditPatientTreatmentsForm({
       teeth_map_id: "",
       treatments_id: "",
@@ -141,25 +145,38 @@ const EditViewPatient = (props) => {
     });
   };
 
-  const deleteTeethTreatmentHandler = (teethTreatmentId) => {
+  const deleteTeethTreatmentHandler = (teethTreatment) => {
     const deleteTeethTreatmentConfirm = window.confirm(
       "Are you sure you want to delete this treatment?"
     );
 
+    // treatment.teeth_treatment_id
+
     if (deleteTeethTreatmentConfirm) {
       axios
-        .delete(`/patients/teeth-treatments/${teethTreatmentId}`)
+        .delete(
+          `/patients/teeth-treatments/${teethTreatment.teeth_treatment_id}`
+        )
         .then((response) => {
           const filteredTeethTreatments = viewEditPatientTreatments.filter(
             (treatment) =>
-              treatment.teeth_treatment_id !== Number(teethTreatmentId)
+              treatment.teeth_treatment_id !==
+              Number(teethTreatment.teeth_treatment_id)
+          );
+          setViewEditPatientTreatments(filteredTeethTreatments);
+        })
+        .catch((err) => {
+          const filteredTeethTreatments = viewEditPatientTreatments.filter(
+            (treatment) => {
+              console.log("teethTreatment_tempId", teethTreatment.temporary_id);
+              console.log("treatment_id", treatment.temporary_id);
+              return treatment.temporary_id !== teethTreatment.temporary_id;
+            }
           );
           setViewEditPatientTreatments(filteredTeethTreatments);
         });
     }
   };
-
-  console.log(appointments);
 
   return (
     <div className="patient-container">
@@ -311,9 +328,7 @@ const EditViewPatient = (props) => {
               ) : null
             )}
             <button
-              onClick={() =>
-                deleteTeethTreatmentHandler(treatment.teeth_treatment_id)
-              }
+              onClick={() => deleteTeethTreatmentHandler(treatment)}
               className="teeth-map-deleteTreatment"
             >
               <img src={XCircleRed} alt="delete treatment" />
