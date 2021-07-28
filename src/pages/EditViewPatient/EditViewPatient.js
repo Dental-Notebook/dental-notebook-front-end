@@ -379,6 +379,7 @@ const EditViewPatient = (props) => {
         <h3>Appointments</h3>
         {appointments.length > 0 &&
           appointments
+            .sort((a, b) => (a.appointment_date < b.appointment_date ? 1 : -1))
             .filter((item) => item.patient_id === Number(props.match.params.id))
             .map((element, index) => (
               <div className="patient-appointments" key={index}>

@@ -42,7 +42,7 @@ const EditTreatment = (props) => {
   return (
     <div>
       {/* ==============EDIT TREATMENT=============== */}
-      {isEditModeActive ? (
+      {isEditModeActive && (
         <Modal>
           <form className="form-container" onSubmit={handleSubmitEditTreatment}>
             <input
@@ -72,18 +72,15 @@ const EditTreatment = (props) => {
             </div>
           </form>
         </Modal>
-      ) : (
-        <button
-          className="edit-button"
-          onClick={() => setIsEditModeActive(true)}
-        >
-          <img
-            src={Pencil}
-            alt="edit treatment button"
-            className="button-edit-treatment"
-          />
-        </button>
       )}
+
+      <button className="edit-button" onClick={() => setIsEditModeActive(true)}>
+        <img
+          src={Pencil}
+          alt="edit treatment button"
+          className="button-edit-treatment"
+        />
+      </button>
     </div>
   );
 };
