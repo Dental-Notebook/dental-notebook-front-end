@@ -156,6 +156,7 @@
   border: 0;
   padding: 6px;
   font-weight: 300;
+  cursor: pointer;
 }
 
 .add-todo-button-container {
