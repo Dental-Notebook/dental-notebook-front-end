@@ -86,9 +86,11 @@ const EditViewPatient = (props) => {
               teeth_map_id: response.data[0].teeth_map_id,
             };
 
+            const { temporary_id, ...newTreatmentWithoutTempId } = newTreatment;
+
             const teethTreatmentPost = axios.post(
               "/patients/teeth-treatments",
-              newTreatment
+              newTreatmentWithoutTempId
             );
 
             updatedPatientTeethTreatmentsPromises.push(teethTreatmentPost);
